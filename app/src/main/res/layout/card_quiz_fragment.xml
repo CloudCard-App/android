@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/cardBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/currentNumDisplay"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:fadingEdge="horizontal"
+        android:src="@mipmap/blue_card" />
+
+    <TextView
+        android:id="@+id/cardDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:text=""
+        android:textSize="28dp"
+        android:typeface="sans" />
+
+    <TableRow
+        android:id="@+id/progress"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:padding="5dip">
+
+        <TextView
+            android:id="@+id/currentNumDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text=""
+            android:textAlignment="gravity"
+            android:textSize="20dp"
+            android:typeface="sans" />
+
+        <SeekBar
+            android:id="@+id/progressSelect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </TableRow>
+
+</RelativeLayout>
