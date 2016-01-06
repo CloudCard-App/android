@@ -20,7 +20,7 @@ public class CardQuizDownloader extends Downloader {
         ArrayList<Object> cardList = new ArrayList<>();
 
         while (reader.hasNext()) {
-            Card thisCard = (Card)reader.getNext();
+            Card thisCard = (Card) reader.getNext();
             cardList.add(thisCard);
         }
 

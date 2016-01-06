@@ -1,6 +1,5 @@
 package com.example.marc.materialtabviews;
 
-import android.app.FragmentManager;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.util.Log;

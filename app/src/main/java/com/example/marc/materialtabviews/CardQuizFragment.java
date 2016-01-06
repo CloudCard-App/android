@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -23,6 +24,8 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
     private TextView numDisplay;
     private ImageView cardBackground;
     private SeekBar progressSelect;
+    private ImageButton backButton;
+    private ImageButton nextButton;
     private String key;
     private int currentIndex = -1; //It doesn't have any index yet, before it starts.
     private ArrayList<Card> cardData;
@@ -113,6 +116,9 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
 
         progressSelect = (SeekBar) getView().findViewById(R.id.progressSelect);
 
+        nextButton = (ImageButton) getView().findViewById(R.id.nextButton);
+        backButton = (ImageButton) getView().findViewById(R.id.backButton);
+
         //Create the downloader, passing in this as the OnTaskCompleted listener
         CardQuizDownloader downloader = new CardQuizDownloader(key, "cardtmp", this);
 
@@ -153,6 +159,20 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 
+            }
+        });
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nextCard();
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                previousCard();
             }
         });
     }

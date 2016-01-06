@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 /**
  * Created by marc on 152312.
- *
+ * <p/>
  * 1qEHY18VWKtrQPzBDdIYwq2DHuPtgleQ0BK-5-dcvcsI
  */
 public class DefaultFragment extends Fragment {

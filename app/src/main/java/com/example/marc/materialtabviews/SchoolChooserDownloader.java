@@ -17,7 +17,7 @@ public class SchoolChooserDownloader extends Downloader {
         ArrayList<Object> schoolList = new ArrayList<>();
 
         while (reader.hasNext()) {
-            School thisSchool = (School)reader.getNext();
+            School thisSchool = (School) reader.getNext();
             schoolList.add(thisSchool);
         }
 

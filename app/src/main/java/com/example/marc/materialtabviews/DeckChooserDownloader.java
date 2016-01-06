@@ -21,7 +21,7 @@ public class DeckChooserDownloader extends Downloader {
         ArrayList<Object> deckList = new ArrayList<>();
 
         while (reader.hasNext()) {
-            Deck thisDeck = (Deck)reader.getNext();
+            Deck thisDeck = (Deck) reader.getNext();
             deckList.add(thisDeck);
         }
 

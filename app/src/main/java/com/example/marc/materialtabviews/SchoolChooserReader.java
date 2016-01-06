@@ -20,7 +20,7 @@ public class SchoolChooserReader extends JSONParser {
 
         if (stuffsInside != null) {
             //Strips away {"v":" and "} from the **good stuff**
-            String name= stuffsInside[0].toString().substring(6, stuffsInside[0].toString().length() - 2);
+            String name = stuffsInside[0].toString().substring(6, stuffsInside[0].toString().length() - 2);
             String key = stuffsInside[1].toString().substring(6, stuffsInside[1].toString().length() - 2);
             String password = stuffsInside[2].toString().substring(6, stuffsInside[2].toString().length() - 2);
 

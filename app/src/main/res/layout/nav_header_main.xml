@@ -15,8 +15,8 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"/>
-        <!--android:src="" -->
+        android:paddingTop="@dimen/nav_header_vertical_spacing" />
+    <!--android:src="" -->
 
     <TextView
         android:layout_width="match_parent"
