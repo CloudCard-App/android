@@ -26,13 +26,12 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //Removes the view below it, such that this view does not appear on top of the previous one.
+        // Removes the view below it, such that this view does not appear on top of the previous one.
         if (container != null) {
             container.removeAllViews();
         }
-
-        //Inflate the card_quiz_fragment inside container
-        //This is very important to call.
+        // Inflate the card_quiz_fragment inside container
+        // This is very important to call.
         View view = inflater.inflate(R.layout.deck_chooser_fragment, container, false);
         return view;
     }
@@ -40,32 +39,24 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        //Set the adapter of the view to the schoolNameList
+        // Set the adapter of the view to the schoolNameList
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_list_item_1, deckNameList);
 
-        //This is the key to the lookup spreadsheet.
-        //It contains deck names and their corresponding keys.
-//        String key = "1ZSFSttwa975pKyCEyEehshjSkcbfb2EomaVg1PF5eds";
+        // This is the key to the lookup spreadsheet.
+        // It contains deck names and their corresponding keys.
         String key = "1Zs0ydpL1twVTgUNi_h9b4KHRafrTMnUljOorwdfBm8I";
 
-        //This is the file where we will save the JSON of the lookup spreadsheet.
+        // This is the file where we will save the JSON of the lookup spreadsheet.
         String fileName = "decks";
 
-        //this is used for the OnTaskCompleted interface
-        //When it completes everything, it calls onTaskCompleted
-        //And passes the arrayList of Deck as data.
+        // this is used for the OnTaskCompleted interface
+        // When it completes everything, it calls onTaskCompleted
+        // And passes the arrayList of Deck as data.
         DeckChooserDownloader downloader = new DeckChooserDownloader(key, fileName, this);
         downloader.execute();
 
         setListAdapter(adapter);
-
-        /*
-        old lookup: https://drive.google.com/open?id=1ZSFSttwa975pKyCEyEehshjSkcbfb2EomaVg1PF5eds
-        new lookup: https://drive.google.com/file/d/0B9CWcw1blzM2blpGY01sMVIzaHc/view?usp=sharing
-
-         */
-
     }
 
     /**
@@ -79,22 +70,32 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
      */
     public void onListItemClick(ListView l, View v, int position, long id) {
         System.out.println("DeckChooserFragment.onListItemClick");
-        Deck selection = deckList.get((int) id); //Gets the clicked place.
-        String key = selection.getKey(); //Gets the key of the clicked place.
+        Deck selection = deckList.get((int) id); // Gets the clicked place.
+        String key = selection.getKey(); // Gets the key of the clicked place.
+        String correctCode = selection.getCode();
 
         System.out.println("selection = " + selection);
         System.out.println("key = " + key);
+        System.out.println("code = " + correctCode);
 
-        CardQuizFragment fragment = new CardQuizFragment();
+        // TODO Look into using bundles (error non-default constructors)
+        CardQuizFragment cardQuiz = new CardQuizFragment();
+        cardQuiz.setKey(key); // Sets the key.
 
-        //TODO Look into using bundles (error non-default constructors)
-        fragment.setKey(key); //Sets the key.
+        // Here, ask for the code
+        EnterCodeFragment codeAuth = new EnterCodeFragment(this,
+                cardQuiz,
+                correctCode,
+                selection.getName());
 
-        //We can get a fragment manager from where?
+        // We can get a fragment manager from the Fragment superclass
         FragmentManager fragmentManager = getFragmentManager();
 
-        //We do the transaction, replacing the container with this fragment and then committing.
-        fragmentManager.beginTransaction().replace(R.id.container, fragment).commit();
+        // We do the transaction, replacing the container with
+        // the code fragment and then committing.
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, codeAuth)
+                .commit();
         System.out.println("Finished committing fragment transaction!");
 
     }
@@ -108,25 +109,31 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
      * @param data The result of the method that calls onTaskCompleted
      */
     public void onTaskCompleted(ArrayList<Object> data) {
+        deckList.clear();
+        deckNameList.clear();
 
-        //Populate the schoolNameList array with names of the decks.
-        //We still will need the schoolList itself for the lookup
-        //of names and keys inside onListItemClick.
+        // Populate the schoolNameList array with names of the decks.
+        // We still will need the schoolList itself for the lookup
+        // of names and keys inside onListItemClick.
         for (Object each : data) {
             deckList.add((Deck) each);
-            deckNameList.add(((Deck) each).getName());
         }
 
-        //Because we like our users.
-        Collections.sort(deckNameList);
+        // Because we like our users.
+        Collections.sort(deckList);
 
-        //Create a new adapter with schoolNameList.
-        //TODO Maybe look into casting into a BaseAdapter, and then calling something like
-        //TODO notifyDataSetChanged().
+        // Now, both the deckList and deckNameList will be sorted.
+        for (Deck each : deckList) {
+            deckNameList.add(each.getName());
+        }
+
+        // Create a new adapter with schoolNameList.
+        // TODO Maybe look into casting into a BaseAdapter, and then calling something like
+        // TODO notifyDataSetChanged().
         try {
             ArrayAdapter<String> newAdapter = new ArrayAdapter<>(getActivity(),
                     android.R.layout.simple_list_item_1, deckNameList);
-            //Set the adapter again.
+            // Set the adapter again.
             setListAdapter(newAdapter);
         } catch (NullPointerException npe) {
             Log.d("DeckChooserFragment", "No data received from deckdownloader.");

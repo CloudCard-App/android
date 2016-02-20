@@ -20,24 +20,23 @@ public class MainActivity extends InstabugAppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Initialize Instabug for bug reporting
         String token = "27c942385b445c742b5dbf1afaacfc5e";
-        Instabug.initialize(this.getApplication(), token); //Weewee!
+        Instabug.initialize(this.getApplication(), token);
 
-        super.onCreate(savedInstanceState); //Don't forget this.
+        super.onCreate(savedInstanceState); // Don't forget this.
 
-
-        //Keeps it in portrait. Maybe implement turning later.
-        //TODO: Is this working?!?!?!?
+        // Keeps it in portrait. Maybe implement turning later.
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        //This is the XML layout for the main activity.
+        // This is the XML layout for the main activity.
         setContentView(R.layout.activity_main);
 
-        //Top toolbar with the three lines.
+        // Top toolbar with the three lines.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Navigation drawer setup.
+        // Navigation drawer setup.
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -49,6 +48,9 @@ public class MainActivity extends InstabugAppCompatActivity
     }
 
     @Override
+    /**
+     * When the back button is pressed
+     */
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -72,7 +74,7 @@ public class MainActivity extends InstabugAppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        // noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }

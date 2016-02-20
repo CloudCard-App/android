@@ -27,7 +27,7 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
     private ImageButton backButton;
     private ImageButton nextButton;
     private String key;
-    private int currentIndex = -1; //It doesn't have any index yet, before it starts.
+    private int currentIndex = -1; // It doesn't have any index yet, before it starts.
     private ArrayList<Card> cardData;
     private int totalLength;
 
@@ -46,14 +46,17 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
      * @return View that is used in onViewCreated
      */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //Removes the view below it, such that this view does not appear on top of the previous one.
+        // Removes the view below it, such that this view does not appear on top of the previous one.
         if (container != null) {
             container.removeAllViews();
         }
 
-        //Inflate the card_quiz_fragment inside container
-        //This is very important to call.
+        // Inflate the card_quiz_fragment inside container
+        // This is very important to call.
         View view = inflater.inflate(R.layout.card_quiz_fragment, container, false);
+
+        // Now that it's inflated, start recording the actions.
+        Log.i("CardQuizFragment", "Started viewing card!");
 
         final GestureDetector gesture = new GestureDetector(getActivity(),
                 new GestureDetector.SimpleOnGestureListener() {
@@ -109,7 +112,7 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //getView() gets the default view for the fragment.
+        // getView() gets the default view for the fragment.
         cardDisplay = (TextView) getView().findViewById(R.id.cardDisplay);
         numDisplay = (TextView) getView().findViewById(R.id.currentNumDisplay);
         cardBackground = (ImageView) getView().findViewById(R.id.cardBackground);
@@ -119,10 +122,10 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
         nextButton = (ImageButton) getView().findViewById(R.id.nextButton);
         backButton = (ImageButton) getView().findViewById(R.id.backButton);
 
-        //Create the downloader, passing in this as the OnTaskCompleted listener
+        // Create the downloader, passing in this as the OnTaskCompleted listener
         CardQuizDownloader downloader = new CardQuizDownloader(key, "cardtmp", this);
 
-        //Do in background stuffs.
+        // Do in background stuffs.
         downloader.execute();
     }
 
@@ -134,7 +137,7 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
     @Override
     public void onTaskCompleted(ArrayList<Object> data) {
 
-        cardDisplay.setText("Swipe right to start!");
+        cardDisplay.setText("Swipe left to start!");
 
         cardData = new ArrayList<>();
         for (Object each : data) {
@@ -179,52 +182,59 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
 
     private void previousCard() {
         System.out.println("CardQuizFragment.previousCard");
-        if (currentIndex > 0) { //If we're not at the beginning
+        if (currentIndex > 0) { // If we're not at the beginning
             currentIndex--;
             updateCard(true);
         } else {
-            //Figure something out here later
+            // Figure something out here later
         }
     }
 
     private void flipCard() {
         System.out.println("CardQuizFragment.flipCard");
-        if (cardDisplay.getText().equals(cardData.get(currentIndex).getFront())) { //Switch to back
+        if (cardDisplay.getText().equals(cardData.get(currentIndex).getFront())) { // Switch to back
             updateCard(false);
-        } else if (cardDisplay.getText().equals(cardData.get(currentIndex).getBack())) { //Switch to front
+        } else if (cardDisplay.getText().equals(cardData.get(currentIndex).getBack())) { // Switch to front
             updateCard(true);
         } else {
-            //Oh no.
-            //Compiler, handle this error, please.
+            // Oh no.
+            // Compiler, handle this error, please.
         }
-        //Sometimes, I feel that the compiler doesn't read my comments.
+        // Sometimes, I feel that the compiler doesn't read my comments.
 
         numDisplay.setText(String.valueOf(currentIndex + 1) + " / " + totalLength);
     }
 
     private void nextCard() {
         System.out.println("CardQuizFragment.nextCard");
-        if (currentIndex < cardData.size() - 1) { //If we're not at the end
+        if (currentIndex < cardData.size() - 1) { // If we're not at the end
             currentIndex++;
             updateCard(true);
         } else {
-            //Figure something out here later.
+            // Figure something out here later.
         }
     }
 
     private void updateCard(boolean front) {
         if (front) {
             cardDisplay.setText(cardData.get(currentIndex).getFront());
-            cardBackground.setImageResource(R.mipmap.blue_card); //R.id.something
+            cardBackground.setImageResource(R.mipmap.blue_card); // R.id.something
         } else {
             cardDisplay.setText(cardData.get(currentIndex).getBack());
-            cardBackground.setImageResource(R.mipmap.yellow_card); //R.id.something
+            cardBackground.setImageResource(R.mipmap.yellow_card); // R.id.something
         }
         numDisplay.setText(String.valueOf(currentIndex + 1) + " / " + totalLength);
-        progressSelect.setProgress(currentIndex); //Wee-Wee!
+        progressSelect.setProgress(currentIndex); // Wee-Wee!
     }
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    @Override
+    public void onStop() {
+        // Record that the user has left.
+        Log.i("CardQuizFragment", "Stopped!");
+        super.onStop();
     }
 }

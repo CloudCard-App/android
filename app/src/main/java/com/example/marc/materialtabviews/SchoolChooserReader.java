@@ -11,7 +11,7 @@ public class SchoolChooserReader extends JSONParser {
 
     public SchoolChooserReader(String fileName) {
         super(fileName);
-        initializeParsing(); //Do we really need this if super() does it already?
+        initializeParsing(); // Do we really need this if super() does it already?
     }
 
     @NonNull
@@ -19,7 +19,7 @@ public class SchoolChooserReader extends JSONParser {
     protected Object configureReturn(JSONObject[] stuffsInside) {
 
         if (stuffsInside != null) {
-            //Strips away {"v":" and "} from the **good stuff**
+            // Strips away {"v":" and "} from the **good stuff**
             String name = stuffsInside[0].toString().substring(6, stuffsInside[0].toString().length() - 2);
             String key = stuffsInside[1].toString().substring(6, stuffsInside[1].toString().length() - 2);
             String password = stuffsInside[2].toString().substring(6, stuffsInside[2].toString().length() - 2);

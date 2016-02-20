@@ -34,11 +34,13 @@ public abstract class Downloader extends AsyncTask<String, Integer, String> {
 
         try {
             String urlString = "https://spreadsheets.google.com/tq?key=" + getKey();
-            URL spreadsheetURL = new URL(urlString);
-            //To get the editable spreadsheet, insert the key:
-            //https://docs.google.com/spreadsheets/d/**** insert key here ****/edit#gid=0
+            System.out.println("The spreadsheet is here: https:// docs.google.com/spreadsheets/d/" + getKey() + "/edit#gid=0");
 
-            //flashofacts is the directory under which we store our files.
+            URL spreadsheetURL = new URL(urlString);
+            // To get the editable spreadsheet, insert the key:
+            // https:// docs.google.com/spreadsheets/d/**** insert key here ****/edit#gid=0
+
+            // flashofacts is the directory under which we store our files.
             String filePath = "/flashofacts/" + getFileName() + ".json";
             System.out.println("downloadTheSheet filePath = " + filePath);
             File jsonOutput = new File(android.os.Environment.getExternalStorageDirectory(), filePath);
@@ -76,8 +78,8 @@ public abstract class Downloader extends AsyncTask<String, Integer, String> {
     }
 
     @Override
-    //Actually, this runs on the **main** thread
-    //Weee!
+    // Actually, this runs on the **main** thread
+    // Weee!
     protected abstract void onPostExecute(String result);
 
     protected String getFileName() {

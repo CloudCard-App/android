@@ -12,8 +12,8 @@ public class DeckChooserDownloader extends Downloader {
     }
 
     @Override
-    //Actually, this runs on the **main** thread
-    //Weee!
+    // Actually, this runs on the **main** thread
+    // Weee!
     protected void onPostExecute(String result) {
 
         System.out.println("onPostExecute fileName = " + getFileName());

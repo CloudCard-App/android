@@ -20,7 +20,7 @@ public abstract class JSONParser {
     String fileName = "";
     private Object obj = null;
     private JSONObject table = null;
-    private JSONArray row = null;
+    private JSONArray rows = null;
     private Iterator<?> values = null;
 
     public JSONParser(String fileName) {
@@ -30,22 +30,24 @@ public abstract class JSONParser {
 
     protected void initializeParsing() {
         String pathToFile = "/flashofacts/" + fileName + ".json";
-        System.out.println("DeckChooserReader.initializeParsing fileName = " + fileName);
-        System.out.println("pathToFile = " + pathToFile);
         try {
-            obj = parser.parse(new FileReader(android.os.Environment.getExternalStorageDirectory() + pathToFile));
-        } catch (ParseException pe) { //Thrown by the parser.parse JSONParser
+            obj = parser.parse(new FileReader(android.os.Environment.
+                    getExternalStorageDirectory() + pathToFile));
+        } catch (ParseException pe) { // Thrown by the parser.parse JSONParser
             System.out.println("CardReader.CardReader ParseException");
             pe.printStackTrace();
-        } catch (FileNotFoundException fnfe) { //Thrown by the FileReader
+        } catch (FileNotFoundException fnfe) { // Thrown by the FileReader
             System.out.println("CardReader.CardReader FileNotFoundException");
             fnfe.printStackTrace();
-        } catch (IOException ioe) { //Thrown possibly by the getExternalStorageDirectory, if we don't have proper permissions.
+        } catch (IOException ioe) {
+            // Thrown possibly by the getExternalStorageDirectory, if we don't
+            // have proper permissions.
             System.out.println("CardReader.CardReader IOException");
             ioe.printStackTrace();
         } finally {
-            if (obj == null) { //We should handle this better.
-                System.exit(-1); //Oh my.
+            if (obj == null) { // We should handle this better.
+                System.out.println("Object was null in JSONParser. Exiting now!");
+                System.exit(-1); // Oh my.
             }
         }
 
@@ -54,25 +56,25 @@ public abstract class JSONParser {
         table = (JSONObject) jsonObject.get("table");
         System.out.println("table: " + table);
 
-        row = (JSONArray) table.get("rows");
-        System.out.println("row: " + row);
+        rows = (JSONArray) table.get("rows");
+        System.out.println("rows: " + rows);
         System.out.println();
 
-        rowIterator = row.iterator();
+        rowIterator = rows.iterator();
     }
 
     public Object getNext() {
         if (rowIterator.hasNext()) {
             JSONObject next = (JSONObject) rowIterator.next();
-            JSONArray name = (JSONArray) next.get("c"); //Gets c
-            values = name.iterator(); //Iterator over all "v"
+            JSONArray name = (JSONArray) next.get("c"); // Gets c
+            values = name.iterator(); // Iterator over all "v"
 
             int count = 0;
-            //If we want to utilize spreadsheets more than n * 2 cells,
-            //then we would need to change the size of stuffsInside.
-            JSONObject[] stuffsInside = new JSONObject[2];
+            // We can handle up to 3 columns. If need be, change this
+            // to more. Nothing else should break, in here at least.
+            JSONObject[] stuffsInside = new JSONObject[3];
 
-            while (values.hasNext()) { //For all "v" labeled things
+            while (values.hasNext()) { // For all "v" labeled things
                 JSONObject thisValue = (JSONObject) values.next();
                 stuffsInside[count] = thisValue;
                 count++;
@@ -82,7 +84,7 @@ public abstract class JSONParser {
 
             return theReturn;
         } else {
-            //Nope! No more!
+            // Nope! No more!
             return null;
         }
     }

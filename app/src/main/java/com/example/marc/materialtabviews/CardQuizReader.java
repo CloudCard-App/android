@@ -21,7 +21,7 @@ public class CardQuizReader extends com.example.marc.materialtabviews.JSONParser
      */
     protected Card configureReturn(JSONObject[] stuffsInside) {
         if (stuffsInside != null) {
-            //Strips away {"v":" and "} from the **good stuff**
+            // Strips away {"v":" and "} from the **good stuff**
             String front = stuffsInside[0].toString().substring(6, stuffsInside[0].toString().length() - 2);
             String back = stuffsInside[1].toString().substring(6, stuffsInside[1].toString().length() - 2);
 

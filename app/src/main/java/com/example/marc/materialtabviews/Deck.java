@@ -7,10 +7,12 @@ public class Deck implements Comparable<Deck> {
 
     private String name = "";
     private String key = "";
+    private String code = "";
 
-    public Deck(String name, String key) {
+    public Deck(String name, String key, String code) {
         this.name = name;
         this.key = key;
+        this.code = code;
     }
 
     public String getName() {
@@ -21,11 +23,16 @@ public class Deck implements Comparable<Deck> {
         return key;
     }
 
+    public String getCode() {
+        return code;
+    }
+
     @Override
     public String toString() {
         return "Deck{" +
                 "name='" + name + '\'' +
                 ", key='" + key + '\'' +
+                ", code='" + code + '\'' +
                 '}';
     }
 
