@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by marc on 152012.
@@ -86,7 +87,7 @@ public class SchoolChooserFragment extends ListFragment implements OnTaskComplet
      *
      * @param data The result of the method that calls onTaskCompleted
      */
-    public void onTaskCompleted(ArrayList<Object> data) {
+    public void onTaskCompleted(List<Object> data) {
 
         // Populate the schoolNameList array with names of the schools.
         // We still will need the schoolList itself for the lookup

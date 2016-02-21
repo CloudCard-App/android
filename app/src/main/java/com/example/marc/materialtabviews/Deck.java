@@ -9,6 +9,9 @@ public class Deck implements Comparable<Deck> {
     private String key = "";
     private String code = "";
 
+    public Deck() {
+    }
+
     public Deck(String name, String key, String code) {
         this.name = name;
         this.key = key;
@@ -19,12 +22,24 @@ public class Deck implements Comparable<Deck> {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getKey() {
         return key;
     }
 
+    public void setKey(String key) {
+        this.key = key;
+    }
+
     public String getCode() {
         return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     @Override

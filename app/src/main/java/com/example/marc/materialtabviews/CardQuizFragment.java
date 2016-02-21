@@ -13,7 +13,13 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by marc on 152812.
@@ -26,14 +32,23 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
     private SeekBar progressSelect;
     private ImageButton backButton;
     private ImageButton nextButton;
-    private String key;
     private int currentIndex = -1; // It doesn't have any index yet, before it starts.
-    private ArrayList<Card> cardData;
     private int totalLength;
-
+    private DeckWithContents deckWithContents = new DeckWithContents();
 
     public CardQuizFragment() {
-        this.key = "";
+    }
+
+    public void setName(String name) {
+        deckWithContents.setName(name);
+    }
+
+    public void setKey(String key) {
+        deckWithContents.setKey(key);
+    }
+
+    public void setCode(String code) {
+        deckWithContents.setCode(code);
     }
 
     public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +65,8 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
         if (container != null) {
             container.removeAllViews();
         }
+
+        reportEnterStudy(deckWithContents.getCode());
 
         // Inflate the card_quiz_fragment inside container
         // This is very important to call.
@@ -123,7 +140,7 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
         backButton = (ImageButton) getView().findViewById(R.id.backButton);
 
         // Create the downloader, passing in this as the OnTaskCompleted listener
-        CardQuizDownloader downloader = new CardQuizDownloader(key, "cardtmp", this);
+        CardQuizDownloader downloader = new CardQuizDownloader(deckWithContents.getName(), deckWithContents.getKey(), deckWithContents.getCode(), "cardtmp", this);
 
         // Do in background stuffs.
         downloader.execute();
@@ -135,16 +152,15 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
      * @param data An ArrayList of Cards, disguised as Object.
      */
     @Override
-    public void onTaskCompleted(ArrayList<Object> data) {
+    public void onTaskCompleted(List<Object> data) {
 
         cardDisplay.setText("Swipe left to start!");
 
-        cardData = new ArrayList<>();
-        for (Object each : data) {
-            cardData.add((Card) each);
-        }
+        DeckWithContents deck = (DeckWithContents) data.get(0);
+        deckWithContents = deck;
+        List<Card> cards = deck.getCards();
 
-        totalLength = cardData.size();
+        totalLength = cards.size();
 
         progressSelect.setMax(totalLength - 1);
         progressSelect.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -192,6 +208,7 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
 
     private void flipCard() {
         System.out.println("CardQuizFragment.flipCard");
+        List<Card> cardData = deckWithContents.getCards();
         if (cardDisplay.getText().equals(cardData.get(currentIndex).getFront())) { // Switch to back
             updateCard(false);
         } else if (cardDisplay.getText().equals(cardData.get(currentIndex).getBack())) { // Switch to front
@@ -207,15 +224,15 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
 
     private void nextCard() {
         System.out.println("CardQuizFragment.nextCard");
+        List<Card> cardData = deckWithContents.getCards();
         if (currentIndex < cardData.size() - 1) { // If we're not at the end
             currentIndex++;
             updateCard(true);
-        } else {
-            // Figure something out here later.
         }
     }
 
     private void updateCard(boolean front) {
+        List<Card> cardData = deckWithContents.getCards();
         if (front) {
             cardDisplay.setText(cardData.get(currentIndex).getFront());
             cardBackground.setImageResource(R.mipmap.blue_card); // R.id.something
@@ -227,14 +244,36 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
         progressSelect.setProgress(currentIndex); // Wee-Wee!
     }
 
-    public void setKey(String key) {
-        this.key = key;
-    }
-
     @Override
     public void onStop() {
         // Record that the user has left.
         Log.i("CardQuizFragment", "Stopped!");
+        reportExitStudy(deckWithContents.getCode());
         super.onStop();
+    }
+
+    public void reportEnterStudy(String code) {
+        sendPostRequest(code, "enterstudy");
+    }
+
+    public void reportExitStudy(String code) {
+        sendPostRequest(code, "exitstudy");
+    }
+
+    private void sendPostRequest(final String code, final String action) {
+        String url = "http://104.197.228.156:8080/studentPost/";
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url, null, null) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                // the POST parameters:
+                params.put("code", code);
+                params.put("action", action);
+                System.out.println("Posting! Code = " + code + " | Action = " + action);
+                return params;
+            }
+        };
+        Volley.newRequestQueue(getActivity()).add(postRequest);
     }
 }

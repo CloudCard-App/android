@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by marc on 152012.
@@ -80,7 +81,9 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
 
         // TODO Look into using bundles (error non-default constructors)
         CardQuizFragment cardQuiz = new CardQuizFragment();
-        cardQuiz.setKey(key); // Sets the key.
+        cardQuiz.setName(selection.getName());
+        cardQuiz.setKey(selection.getKey()); // Sets the key.
+        cardQuiz.setCode(selection.getCode());
 
         // Here, ask for the code
         EnterCodeFragment codeAuth = new EnterCodeFragment(this,
@@ -108,7 +111,7 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
      *
      * @param data The result of the method that calls onTaskCompleted
      */
-    public void onTaskCompleted(ArrayList<Object> data) {
+    public void onTaskCompleted(List<Object> data) {
         deckList.clear();
         deckNameList.clear();
 
