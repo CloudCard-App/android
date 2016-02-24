@@ -6,14 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * Created by marc on 152312.
- * <p/>
- * 1qEHY18VWKtrQPzBDdIYwq2DHuPtgleQ0BK-5-dcvcsI
- */
 public class DefaultFragment extends Fragment {
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         if (container != null) {
             container.removeAllViews();
         }

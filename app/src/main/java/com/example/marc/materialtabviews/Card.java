@@ -1,8 +1,5 @@
 package com.example.marc.materialtabviews;
 
-/**
- * Created by marc on 152812.
- */
 public class Card extends Object {
 
     private String front = "";

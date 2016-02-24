@@ -11,9 +11,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 
-/**
- * Created by marc on 152812.
- */
 public abstract class JSONParser {
     protected org.json.simple.parser.JSONParser parser = null;
     Iterator<?> rowIterator = null;
@@ -40,7 +37,7 @@ public abstract class JSONParser {
             System.out.println("CardReader.CardReader FileNotFoundException");
             fnfe.printStackTrace();
         } catch (IOException ioe) {
-            // Thrown possibly by the getExternalStorageDirectory, if we don't
+            // Thrown possibly by the getExternalStorageDirectory if we don't
             // have proper permissions.
             System.out.println("CardReader.CardReader IOException");
             ioe.printStackTrace();
@@ -84,7 +81,7 @@ public abstract class JSONParser {
 
             return theReturn;
         } else {
-            // Nope! No more!
+            // No more data
             return null;
         }
     }

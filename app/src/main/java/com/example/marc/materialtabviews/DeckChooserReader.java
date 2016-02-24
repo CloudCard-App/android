@@ -4,9 +4,6 @@ import android.support.annotation.NonNull;
 
 import org.json.simple.JSONObject;
 
-/**
- * Created by marc on 152712.
- */
 public class DeckChooserReader extends com.example.marc.materialtabviews.JSONParser {
 
     public DeckChooserReader(String fileName) {
@@ -19,9 +16,12 @@ public class DeckChooserReader extends com.example.marc.materialtabviews.JSONPar
     protected Deck configureReturn(JSONObject[] stuffsInside) {
         if (stuffsInside != null) {
             // Strips away {"v":" and "} from the **good stuff**
-            String deckName = stuffsInside[0].toString().substring(6, stuffsInside[0].toString().length() - 2);
-            String deckKey = stuffsInside[1].toString().substring(6, stuffsInside[1].toString().length() - 2);
-            String deckCode = stuffsInside[2].toString().substring(6, stuffsInside[2].toString().length() - 2);
+            String deckName = stuffsInside[0].toString().substring(6,
+                    stuffsInside[0].toString().length() - 2);
+            String deckKey = stuffsInside[1].toString().substring(6,
+                    stuffsInside[1].toString().length() - 2);
+            String deckCode = stuffsInside[2].toString().substring(6,
+                    stuffsInside[2].toString().length() - 2);
             return new Deck(deckName, deckKey, deckCode);
         } else {
             return null;

@@ -9,9 +9,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
- * Created by marc on 152812.
- */
 public abstract class Downloader extends AsyncTask<String, Integer, String> {
     protected String key = "";
     protected String fileName = "";
@@ -29,12 +26,15 @@ public abstract class Downloader extends AsyncTask<String, Integer, String> {
     }
 
     public void downloadTheSheet() {
+        // TODO: Replace all System.out.printlns with Log
+        // System.out.println() is not synchronous, so they are out of sync with actual happenings
         System.out.println("DeckChooserDownloader.downloadTheSheet");
-        System.out.println("---------------------------------------------------------");
+        System.out.println("--------------------------------------");
 
         try {
             String urlString = "https://spreadsheets.google.com/tq?key=" + getKey();
-            System.out.println("The spreadsheet is here: https:// docs.google.com/spreadsheets/d/" + getKey() + "/edit#gid=0");
+            System.out.println("The spreadsheet is here: https:// docs.google.com/spreadsheets/d/"
+                    + getKey() + "/edit#gid=0");
 
             URL spreadsheetURL = new URL(urlString);
             // To get the editable spreadsheet, insert the key:
@@ -43,7 +43,8 @@ public abstract class Downloader extends AsyncTask<String, Integer, String> {
             // flashofacts is the directory under which we store our files.
             String filePath = "/flashofacts/" + getFileName() + ".json";
             System.out.println("downloadTheSheet filePath = " + filePath);
-            File jsonOutput = new File(android.os.Environment.getExternalStorageDirectory(), filePath);
+            File jsonOutput = new File(android.os.Environment.getExternalStorageDirectory(),
+                    filePath);
 
             FileUtils.write(jsonOutput, "");
             FileUtils.copyURLToFile(spreadsheetURL, jsonOutput);
@@ -68,7 +69,6 @@ public abstract class Downloader extends AsyncTask<String, Integer, String> {
 
     @Override
     protected void onProgressUpdate(Integer... values) {
-
     }
 
     @Override
@@ -79,7 +79,6 @@ public abstract class Downloader extends AsyncTask<String, Integer, String> {
 
     @Override
     // Actually, this runs on the **main** thread
-    // Weee!
     protected abstract void onPostExecute(String result);
 
     protected String getFileName() {
