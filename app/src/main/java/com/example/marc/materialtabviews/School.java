@@ -1,8 +1,5 @@
 package com.example.marc.materialtabviews;
 
-/**
- * Created by marc on 16031.
- */
 public class School {
 
     private String name;

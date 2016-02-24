@@ -26,6 +26,7 @@ public class MainActivity extends InstabugAppCompatActivity
 
         super.onCreate(savedInstanceState); // Don't forget this.
 
+        // TODO: Make sure this is actually working!
         // Keeps it in portrait. Maybe implement turning later.
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -88,9 +89,11 @@ public class MainActivity extends InstabugAppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        // For AppCompat use getSupportFragmentManager
         Fragment fragment = new DefaultFragment();
-        FragmentManager fragmentManager = getFragmentManager(); // For AppCompat use getSupportFragmentManager
+        FragmentManager fragmentManager = getFragmentManager();
 
+        // TODO: Clean up UI and this
         if (id == R.id.nav_deckfinder) {
             fragment = new DeckChooserFragment();
         } else if (id == R.id.nav_yourdecks) {

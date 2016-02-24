@@ -4,9 +4,6 @@ import android.support.annotation.NonNull;
 
 import org.json.simple.JSONObject;
 
-/**
- * Created by marc on 152812.
- */
 public class CardQuizReader extends com.example.marc.materialtabviews.JSONParser {
 
     public CardQuizReader(String fileName) {
@@ -22,8 +19,10 @@ public class CardQuizReader extends com.example.marc.materialtabviews.JSONParser
     protected Card configureReturn(JSONObject[] stuffsInside) {
         if (stuffsInside != null) {
             // Strips away {"v":" and "} from the **good stuff**
-            String front = stuffsInside[0].toString().substring(6, stuffsInside[0].toString().length() - 2);
-            String back = stuffsInside[1].toString().substring(6, stuffsInside[1].toString().length() - 2);
+            String front = stuffsInside[0].toString().
+                    substring(6, stuffsInside[0].toString().length() - 2);
+            String back = stuffsInside[1].toString().
+                    substring(6, stuffsInside[1].toString().length() - 2);
 
             return new Card(front, back);
         } else {

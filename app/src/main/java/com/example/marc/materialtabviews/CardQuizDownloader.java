@@ -3,14 +3,12 @@ package com.example.marc.materialtabviews;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by marc on 152812.
- */
 public class CardQuizDownloader extends Downloader {
 
     private DeckWithContents deckWithContents = null;
 
-    public CardQuizDownloader(String name, String key, String code, String fileName, OnTaskCompleted completionWaiter) {
+    public CardQuizDownloader(String name, String key, String code, String fileName,
+                              OnTaskCompleted completionWaiter) {
         super(fileName, completionWaiter, key);
         deckWithContents = new DeckWithContents(name, key, code, null);
     }

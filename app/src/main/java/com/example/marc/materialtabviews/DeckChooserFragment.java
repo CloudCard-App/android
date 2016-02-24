@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by marc on 152012.
- */
 public class DeckChooserFragment extends ListFragment implements OnTaskCompleted {
 
     ArrayList<Deck> deckList = new ArrayList<>();
@@ -26,8 +23,10 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
 
     }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Removes the view below it, such that this view does not appear on top of the previous one.
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Removes the view below it, such that this view does not
+        // appear on top of the previous one.
         if (container != null) {
             container.removeAllViews();
         }
@@ -51,7 +50,7 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
         // This is the file where we will save the JSON of the lookup spreadsheet.
         String fileName = "decks";
 
-        // this is used for the OnTaskCompleted interface
+        // This is used for the OnTaskCompleted interface
         // When it completes everything, it calls onTaskCompleted
         // And passes the arrayList of Deck as data.
         DeckChooserDownloader downloader = new DeckChooserDownloader(key, fileName, this);
@@ -79,7 +78,7 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
         System.out.println("key = " + key);
         System.out.println("code = " + correctCode);
 
-        // TODO Look into using bundles (error non-default constructors)
+        // TODO Look into using bundles
         CardQuizFragment cardQuiz = new CardQuizFragment();
         cardQuiz.setName(selection.getName());
         cardQuiz.setKey(selection.getKey()); // Sets the key.

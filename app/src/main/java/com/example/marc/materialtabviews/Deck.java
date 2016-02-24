@@ -1,8 +1,5 @@
 package com.example.marc.materialtabviews;
 
-/**
- * Created by marc on 152712.
- */
 public class Deck implements Comparable<Deck> {
 
     private String name = "";

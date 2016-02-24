@@ -21,9 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by marc on 152812.
- */
 public class CardQuizFragment extends Fragment implements OnTaskCompleted {
 
     private TextView cardDisplay;
@@ -60,8 +57,10 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
      *
      * @return View that is used in onViewCreated
      */
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Removes the view below it, such that this view does not appear on top of the previous one.
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Removes the view below it, such that this view does not appear
+        // on top of the previous one.
         if (container != null) {
             container.removeAllViews();
         }
@@ -88,7 +87,6 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
                                            float velocityY) {
                         Log.i("cardQuizFragment", "onFling has been called!");
                         final int SWIPE_MIN_DISTANCE = 120;
-                        final int SWIPE_MAX_OFF_PATH = 250;
                         final int SWIPE_THRESHOLD_VELOCITY = 200;
                         try {
                             if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
@@ -140,7 +138,8 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
         backButton = (ImageButton) getView().findViewById(R.id.backButton);
 
         // Create the downloader, passing in this as the OnTaskCompleted listener
-        CardQuizDownloader downloader = new CardQuizDownloader(deckWithContents.getName(), deckWithContents.getKey(), deckWithContents.getCode(), "cardtmp", this);
+        CardQuizDownloader downloader = new CardQuizDownloader(deckWithContents.getName(),
+                deckWithContents.getKey(), deckWithContents.getCode(), "cardtmp", this);
 
         // Do in background stuffs.
         downloader.execute();
@@ -209,16 +208,11 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
     private void flipCard() {
         System.out.println("CardQuizFragment.flipCard");
         List<Card> cardData = deckWithContents.getCards();
-        if (cardDisplay.getText().equals(cardData.get(currentIndex).getFront())) { // Switch to back
-            updateCard(false);
-        } else if (cardDisplay.getText().equals(cardData.get(currentIndex).getBack())) { // Switch to front
-            updateCard(true);
-        } else {
-            // Oh no.
-            // Compiler, handle this error, please.
+        if (cardDisplay.getText().equals(cardData.get(currentIndex).getFront())) {
+            updateCard(false); // Switch to back
+        } else if (cardDisplay.getText().equals(cardData.get(currentIndex).getBack())) {
+            updateCard(true); // Switch to front
         }
-        // Sometimes, I feel that the compiler doesn't read my comments.
-
         numDisplay.setText(String.valueOf(currentIndex + 1) + " / " + totalLength);
     }
 
@@ -235,10 +229,10 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
         List<Card> cardData = deckWithContents.getCards();
         if (front) {
             cardDisplay.setText(cardData.get(currentIndex).getFront());
-            cardBackground.setImageResource(R.mipmap.blue_card); // R.id.something
+            cardBackground.setImageResource(R.mipmap.blue_card);
         } else {
             cardDisplay.setText(cardData.get(currentIndex).getBack());
-            cardBackground.setImageResource(R.mipmap.yellow_card); // R.id.something
+            cardBackground.setImageResource(R.mipmap.yellow_card);
         }
         numDisplay.setText(String.valueOf(currentIndex + 1) + " / " + totalLength);
         progressSelect.setProgress(currentIndex); // Wee-Wee!

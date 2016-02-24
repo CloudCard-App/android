@@ -13,9 +13,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by marc on 152012.
- */
 public class SchoolChooserFragment extends ListFragment implements OnTaskCompleted {
 
     ArrayList<School> schoolList = new ArrayList<>();
@@ -25,8 +22,10 @@ public class SchoolChooserFragment extends ListFragment implements OnTaskComplet
 
     }
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Removes the view below it, such that this view does not appear on top of the previous one.
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Removes the view below it, such that this view does not
+        // appear on top of the previous one.
         if (container != null) {
             container.removeAllViews();
         }
@@ -73,10 +72,6 @@ public class SchoolChooserFragment extends ListFragment implements OnTaskComplet
     public void onListItemClick(ListView l, View v, int position, long id) {
         System.out.println("SchoolChooserFragment.onListItemClick");
         School selection = schoolList.get((int) id); // Gets the clicked place.
-        String key = selection.getKey(); // Gets the key of the clicked place.
-        String password = selection.getPassword();
-
-
     }
 
     @Override
