@@ -1,7 +1,5 @@
 package com.example.marc.materialtabviews;
 
-import android.support.annotation.NonNull;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -13,12 +11,10 @@ import java.util.Iterator;
 
 public abstract class DownloadedDeckParser {
     protected org.json.simple.parser.JSONParser parser = null;
-    Iterator<?> rowIterator = null;
-    String fileName = "";
+    private Iterator<?> rowIterator = null;
+    private String fileName = "";
     private Object obj = null;
-    private JSONObject table = null;
     private JSONArray rows = null;
-    private Iterator<?> values = null;
 
     public DownloadedDeckParser(String fileName) {
         this.fileName = fileName;
@@ -30,6 +26,7 @@ public abstract class DownloadedDeckParser {
         File fileHere = new File(pathToFile);
         try {
             // Creates new file if it doesn't exist
+            //noinspection ResultOfMethodCallIgnored
             fileHere.createNewFile();
             // Initializes parsing
             obj = parser.parse(new FileReader(android.os.Environment.
@@ -52,7 +49,7 @@ public abstract class DownloadedDeckParser {
 
         JSONObject jsonObject = (JSONObject) obj;
 
-        table = (JSONObject) jsonObject.get("table");
+        JSONObject table = (JSONObject) jsonObject.get("table");
         System.out.println("table: " + table);
 
         rows = (JSONArray) table.get("rows");
@@ -66,7 +63,7 @@ public abstract class DownloadedDeckParser {
         if (rowIterator.hasNext()) {
             JSONObject next = (JSONObject) rowIterator.next();
             JSONArray name = (JSONArray) next.get("c"); // Gets c
-            values = name.iterator(); // Iterator over all "v"
+            Iterator<?> values = name.iterator();
 
             int count = 0;
             // We can handle up to 3 columns. If need be, change this
@@ -79,16 +76,13 @@ public abstract class DownloadedDeckParser {
                 count++;
             }
 
-            Object theReturn = configureReturn(stuffsInside);
-
-            return theReturn;
+            return configureReturn(stuffsInside);
         } else {
             // No more data
             return null;
         }
     }
 
-    @NonNull
     protected abstract Object configureReturn(JSONObject[] stuffsInside);
 
     public boolean hasNext() {

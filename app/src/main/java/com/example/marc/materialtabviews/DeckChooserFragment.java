@@ -16,8 +16,8 @@ import java.util.List;
 
 public class DeckChooserFragment extends ListFragment implements OnTaskCompleted {
 
-    ArrayList<Deck> deckList = new ArrayList<>();
-    ArrayList<String> deckNameList = new ArrayList<>();
+    private ArrayList<Deck> deckList = new ArrayList<>();
+    private ArrayList<String> deckNameList = new ArrayList<>();
 
     public DeckChooserFragment() {
 
@@ -32,8 +32,7 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
         }
         // Inflate the card_quiz_fragment inside container
         // This is very important to call.
-        View view = inflater.inflate(R.layout.deck_chooser_fragment, container, false);
-        return view;
+        return inflater.inflate(R.layout.deck_chooser_fragment, container, false);
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -105,7 +104,7 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
     @Override
     /**
      * We assume that the ArrayList<Object> that we get
-     * is of type Deck, for purposes of reusability of the
+     * is of type Deck, for purposes of re-usability of the
      * OnTaskCompleted interface.
      *
      * @param data The result of the method that calls onTaskCompleted

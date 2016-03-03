@@ -1,7 +1,5 @@
 package com.example.marc.materialtabviews;
 
-import android.support.annotation.NonNull;
-
 import org.json.simple.JSONObject;
 
 public class CardQuizReader extends DownloadedDeckParser {
@@ -12,7 +10,6 @@ public class CardQuizReader extends DownloadedDeckParser {
     }
 
     @Override
-    @NonNull
     /**
      * This is called every time getNext is called; it prepares the return.
      */

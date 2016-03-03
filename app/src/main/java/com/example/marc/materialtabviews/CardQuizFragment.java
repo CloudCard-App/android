@@ -200,8 +200,6 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
         if (currentIndex > 0) { // If we're not at the beginning
             currentIndex--;
             updateCard(true);
-        } else {
-            // Figure something out here later
         }
     }
 

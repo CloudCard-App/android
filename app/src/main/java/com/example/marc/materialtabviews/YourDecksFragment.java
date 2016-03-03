@@ -31,8 +31,7 @@ public class YourDecksFragment extends ListFragment {
         }
         // Inflate the card_quiz_fragment inside container
         // This is very important to call.
-        View view = inflater.inflate(R.layout.deck_chooser_fragment, container, false);
-        return view;
+        return inflater.inflate(R.layout.deck_chooser_fragment, container, false);
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {

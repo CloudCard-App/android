@@ -8,13 +8,13 @@
     <TextView
         android:id="@+id/defaultText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="175dp"
         android:layout_weight="0.21"
         android:cursorVisible="false"
-        android:text="Select a task from the drawer"
+        android:text="@string/selectTaskFromDrawer"
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/secondary_text_light"
-        android:textSize="50dp" />
+        android:textSize="50sp" />
 </LinearLayout>

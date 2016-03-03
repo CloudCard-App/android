@@ -21,7 +21,7 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center"
         android:text=""
-        android:textSize="28dp"
+        android:textSize="28sp"
         android:typeface="sans" />
 
     <TableRow
@@ -35,10 +35,9 @@
             android:id="@+id/currentNumDisplay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:text=""
             android:textAlignment="gravity"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:typeface="sans" />
 
         <SeekBar

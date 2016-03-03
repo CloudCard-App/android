@@ -33,6 +33,7 @@ public class DeckParser {
         File fileHere = new File(fileName);
         try {
             // Creates new file if it doesn't exist
+            //noinspection ResultOfMethodCallIgnored
             fileHere.createNewFile();
             // Initializes parsing
             obj = parser.parse(new FileReader(android.os.Environment.
@@ -66,8 +67,7 @@ public class DeckParser {
             String key = (String) next.get("key");
             String code = (String) next.get("code");
 
-            Deck returnDeck = new Deck(name, key, code);
-            return returnDeck;
+            return new Deck(name, key, code);
         } else {
             // No more data
             return null;

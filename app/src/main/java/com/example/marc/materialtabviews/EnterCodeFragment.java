@@ -15,9 +15,6 @@ public class EnterCodeFragment extends IntermediateFragment {
 
     private String correctCode;
     private String title;
-    private Button backButton;
-    private Button submitButton;
-    private TextView titleDisplay;
     private TextView codeCorrectness;
     private EditText codeForm;
 
@@ -36,17 +33,16 @@ public class EnterCodeFragment extends IntermediateFragment {
         if (container != null) {
             container.removeAllViews();
         }
-        View view = inflater.inflate(R.layout.enter_code_fragment, container, false);
-        return view;
+        return inflater.inflate(R.layout.enter_code_fragment, container, false);
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        backButton = (Button) getView().findViewById(R.id.cancelButton);
-        submitButton = (Button) getView().findViewById(R.id.submitButton);
+        Button backButton = (Button) getView().findViewById(R.id.cancelButton);
+        Button submitButton = (Button) getView().findViewById(R.id.submitButton);
         codeForm = (EditText) getView().findViewById(R.id.enterCode);
         codeCorrectness = (TextView) getView().findViewById(R.id.codeCorrectness);
-        titleDisplay = (TextView) getView().findViewById(R.id.titleText);
+        TextView titleDisplay = (TextView) getView().findViewById(R.id.titleText);
 
         titleDisplay.setText(title);
 
@@ -65,11 +61,11 @@ public class EnterCodeFragment extends IntermediateFragment {
             public void onClick(View v) {
                 String codeText = codeForm.getText().toString();
                 if (codeText.equals(correctCode)) {
-                    codeCorrectness.setText("Correct code");
+                    codeCorrectness.setText(R.string.correctCode);
                     toggleKeyboard(); // Close upon exiting
                     gotoNext();
                 } else {
-                    codeCorrectness.setText("Incorrect code");
+                    codeCorrectness.setText(R.string.incorrectCode);
                 }
             }
         });

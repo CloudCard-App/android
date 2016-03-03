@@ -10,9 +10,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public abstract class Downloader extends AsyncTask<String, Integer, String> {
-    protected String key = "";
-    protected String fileName = "";
     protected OnTaskCompleted completionWaiter;
+    private String key = "";
+    private String fileName = "";
 
     public Downloader(String fileName, OnTaskCompleted completionWaiter, String key) {
         this.fileName = fileName;
@@ -25,7 +25,7 @@ public abstract class Downloader extends AsyncTask<String, Integer, String> {
 
     }
 
-    public void downloadTheSheet() {
+    protected void downloadTheSheet() {
         // TODO: Replace all System.out.printlns with Log
         // System.out.println() is not synchronous, so they are out of sync with actual happenings
         System.out.println("DeckChooserDownloader.downloadTheSheet");

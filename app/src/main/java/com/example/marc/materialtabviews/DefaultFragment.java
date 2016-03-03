@@ -13,8 +13,7 @@ public class DefaultFragment extends Fragment {
         if (container != null) {
             container.removeAllViews();
         }
-        View returnedView = inflater.inflate(R.layout.default_fragment, container, false);
-        return returnedView;
+        return inflater.inflate(R.layout.default_fragment, container, false);
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
