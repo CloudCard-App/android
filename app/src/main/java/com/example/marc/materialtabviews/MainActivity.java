@@ -97,7 +97,7 @@ public class MainActivity extends InstabugAppCompatActivity
         if (id == R.id.nav_deckfinder) {
             fragment = new DeckChooserFragment();
         } else if (id == R.id.nav_yourdecks) {
-
+            fragment = new YourDecksFragment();
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {

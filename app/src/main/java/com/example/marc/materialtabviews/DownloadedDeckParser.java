@@ -6,6 +6,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -27,7 +28,11 @@ public abstract class DownloadedDeckParser {
 
     protected void initializeParsing() {
         String pathToFile = "/flashofacts/" + fileName + ".json";
+        File fileHere = new File(pathToFile);
         try {
+            // Creates new file if it doesn't exist
+            fileHere.createNewFile();
+            // Initializes parsing
             obj = parser.parse(new FileReader(android.os.Environment.
                     getExternalStorageDirectory() + pathToFile));
         } catch (ParseException pe) { // Thrown by the parser.parse DownloadedDeckParser
