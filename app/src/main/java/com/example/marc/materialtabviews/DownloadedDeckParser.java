@@ -11,7 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 
-public abstract class JSONParser {
+public abstract class DownloadedDeckParser {
     protected org.json.simple.parser.JSONParser parser = null;
     Iterator<?> rowIterator = null;
     String fileName = "";
@@ -20,7 +20,7 @@ public abstract class JSONParser {
     private JSONArray rows = null;
     private Iterator<?> values = null;
 
-    public JSONParser(String fileName) {
+    public DownloadedDeckParser(String fileName) {
         this.fileName = fileName;
         parser = new org.json.simple.parser.JSONParser();
     }
@@ -30,7 +30,7 @@ public abstract class JSONParser {
         try {
             obj = parser.parse(new FileReader(android.os.Environment.
                     getExternalStorageDirectory() + pathToFile));
-        } catch (ParseException pe) { // Thrown by the parser.parse JSONParser
+        } catch (ParseException pe) { // Thrown by the parser.parse DownloadedDeckParser
             System.out.println("CardReader.CardReader ParseException");
             pe.printStackTrace();
         } catch (FileNotFoundException fnfe) { // Thrown by the FileReader
@@ -43,7 +43,7 @@ public abstract class JSONParser {
             ioe.printStackTrace();
         } finally {
             if (obj == null) { // We should handle this better.
-                System.out.println("Object was null in JSONParser. Exiting now!");
+                System.out.println("Object was null in DownloadedDeckParser. Exiting now!");
                 System.exit(-1); // Oh my.
             }
         }

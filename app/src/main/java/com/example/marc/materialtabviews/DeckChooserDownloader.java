@@ -15,7 +15,7 @@ public class DeckChooserDownloader extends Downloader {
     protected void onPostExecute(String result) {
 
         System.out.println("onPostExecute fileName = " + getFileName());
-        DeckChooserReader reader = new DeckChooserReader(getFileName());
+        DownloadedDeckChooserReader reader = new DownloadedDeckChooserReader(getFileName());
         ArrayList<Object> deckList = new ArrayList<>();
 
         while (reader.hasNext()) {

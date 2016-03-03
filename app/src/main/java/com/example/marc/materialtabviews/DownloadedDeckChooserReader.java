@@ -4,9 +4,9 @@ import android.support.annotation.NonNull;
 
 import org.json.simple.JSONObject;
 
-public class DeckChooserReader extends com.example.marc.materialtabviews.JSONParser {
+public class DownloadedDeckChooserReader extends DownloadedDeckParser {
 
-    public DeckChooserReader(String fileName) {
+    public DownloadedDeckChooserReader(String fileName) {
         super(fileName);
         initializeParsing(); // Do we really need this if super() does it already?
     }

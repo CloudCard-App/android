@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import org.json.simple.JSONObject;
 
-public class CardQuizReader extends com.example.marc.materialtabviews.JSONParser {
+public class CardQuizReader extends DownloadedDeckParser {
 
     public CardQuizReader(String fileName) {
         super(fileName);
