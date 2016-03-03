@@ -7,7 +7,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
@@ -35,12 +34,10 @@ public abstract class DownloadedDeckParser {
             // Initializes parsing
             obj = parser.parse(new FileReader(android.os.Environment.
                     getExternalStorageDirectory() + pathToFile));
-        } catch (ParseException pe) { // Thrown by the parser.parse DownloadedDeckParser
+        } catch (ParseException pe) {
+            // Thrown by the parser.parse DownloadedDeckParser
             System.out.println("CardReader.CardReader ParseException");
             pe.printStackTrace();
-        } catch (FileNotFoundException fnfe) { // Thrown by the FileReader
-            System.out.println("CardReader.CardReader FileNotFoundException");
-            fnfe.printStackTrace();
         } catch (IOException ioe) {
             // Thrown possibly by the getExternalStorageDirectory if we don't
             // have proper permissions.
