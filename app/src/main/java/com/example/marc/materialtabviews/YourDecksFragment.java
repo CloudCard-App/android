@@ -16,9 +16,10 @@ public class YourDecksFragment extends ListFragment {
 
     private List<Deck> deckList = new ArrayList<>();
     private List<String> deckNameList = new ArrayList<>();
-    private DeckParser deckParser = new DeckParser();
+    private DeckParser deckParser;
 
     public YourDecksFragment() {
+
         deckParser.setFileName("savedDecks");
     }
 

@@ -13,13 +13,25 @@ import android.widget.TextView;
 
 public class EnterCodeFragment extends IntermediateFragment {
 
+    // The correct code to approve the deck for access
     private String correctCode;
+    // The title of the deck
     private String title;
+    // The place where correct/incorrect is shown
+    // TODO: Make sure this is working!
     private TextView codeCorrectness;
+    // The place where the user can type in the code
     private EditText codeForm;
 
+    /**
+    * Default constructor that doesn't setup the next or previous fragments.
+    */
     public EnterCodeFragment() {
         super(null, null);
+        correctCode = "";
+        title = "";
+        codeCorrectness = null;
+        codeForm = null;
     }
 
     public EnterCodeFragment(Fragment previous, Fragment next, String correctCode, String title) {

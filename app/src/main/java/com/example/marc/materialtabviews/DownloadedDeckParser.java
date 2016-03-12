@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
@@ -23,22 +24,23 @@ public abstract class DownloadedDeckParser {
 
     protected void initializeParsing() {
         String pathToFile = "/flashofacts/" + fileName + ".json";
-        File fileHere = new File(pathToFile);
         try {
-            // Creates new file if it doesn't exist
-            //noinspection ResultOfMethodCallIgnored
-            fileHere.createNewFile();
             // Initializes parsing
             obj = parser.parse(new FileReader(android.os.Environment.
                     getExternalStorageDirectory() + pathToFile));
         } catch (ParseException pe) {
             // Thrown by the parser.parse DownloadedDeckParser
-            System.out.println("CardReader.CardReader ParseException");
+            System.out.println("ParseException for " + pathToFile);
             pe.printStackTrace();
+        } catch (FileNotFoundException fnfe) {
+            // Thrown if file does not exist.
+            // TODO: Create file if not exist
+            System.out.println("File Not found exception for " + pathToFile);
+            fnfe.printStackTrace();
         } catch (IOException ioe) {
             // Thrown possibly by the getExternalStorageDirectory if we don't
             // have proper permissions.
-            System.out.println("CardReader.CardReader IOException");
+            System.out.println("IOException for file " + pathToFile);
             ioe.printStackTrace();
         } finally {
             if (obj == null) { // We should handle this better.

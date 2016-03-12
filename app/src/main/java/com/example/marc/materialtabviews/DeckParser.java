@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
@@ -30,18 +31,24 @@ public class DeckParser {
 
     protected void initializeParsing() {
         String pathToFile = "/flashofacts/" + fileName + ".json";
-        File fileHere = new File(fileName);
+        File fileHere = new File(pathToFile);
+
         try {
             // Creates new file if it doesn't exist
             //noinspection ResultOfMethodCallIgnored
-            fileHere.createNewFile();
-            // Initializes parsing
-            obj = parser.parse(new FileReader(android.os.Environment.
-                    getExternalStorageDirectory() + pathToFile));
+            if (fileHere.createNewFile()) {
+                // Initializes parsing
+                obj = parser.parse(new FileReader(android.os.Environment.
+                        getExternalStorageDirectory() + pathToFile));
+            }
         } catch (ParseException pe) {
             // Thrown by the parser.parse DownloadedDeckParser
             System.out.println("DeckParser.initializeParsing ParseException");
             pe.printStackTrace();
+        } catch (FileNotFoundException fnfe) {
+            // If file does not exist
+            // TODO: Create file if it does not exist
+            System.out.println("FileNotFoundException for file " + pathToFile);
         } catch (IOException ioe) {
             // Thrown possibly by the getExternalStorageDirectory if we don't
             // have proper permissions.
@@ -50,13 +57,13 @@ public class DeckParser {
         } finally {
             if (obj == null) { // We should handle this better.
                 System.out.println("Object was null in DeckParser. Exiting now!");
-                System.exit(-1); // Oh my.
+//                System.exit(-1); // Oh my.
+                deckIterator = null;
+            } else {
+                JSONArray deckArray = (JSONArray) obj;
+                deckIterator = deckArray.iterator();
             }
         }
-
-        JSONArray deckArray = (JSONArray) obj;
-
-        deckIterator = deckArray.iterator();
     }
 
     public Deck getNextDeck() {
