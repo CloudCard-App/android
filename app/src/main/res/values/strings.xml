@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Flash-o-Facts</string>
+    <string name="app_name">CloudCard</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -8,5 +8,6 @@
     <string name="selectTaskFromDrawer">Select a task from the drawer</string>
     <string name="correctCode">Correct code</string>
     <string name="incorrectCode">Incorrect code</string>
+    <string name="cloudcard">CloudCard</string>
 
 </resources>
