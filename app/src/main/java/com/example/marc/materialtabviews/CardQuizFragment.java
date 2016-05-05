@@ -139,7 +139,7 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
 
         // Create the downloader, passing in this as the OnTaskCompleted listener
         CardQuizDownloader downloader = new CardQuizDownloader(deckWithContents.getName(),
-                deckWithContents.getKey(), deckWithContents.getCode(), "cardtmp", this);
+                deckWithContents.getKey(), deckWithContents.getCode(), deckWithContents.getName(), this);
 
         // Do in background stuffs.
         downloader.execute();
