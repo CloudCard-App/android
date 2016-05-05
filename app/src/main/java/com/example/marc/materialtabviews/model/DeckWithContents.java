@@ -1,4 +1,4 @@
-package com.example.marc.materialtabviews;
+package com.example.marc.materialtabviews.model;
 
 import java.util.List;
 

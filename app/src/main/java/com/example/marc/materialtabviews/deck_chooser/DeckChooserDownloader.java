@@ -1,4 +1,9 @@
-package com.example.marc.materialtabviews;
+package com.example.marc.materialtabviews.deck_chooser;
+
+import com.example.marc.materialtabviews.Downloader;
+import com.example.marc.materialtabviews.OnTaskCompleted;
+import com.example.marc.materialtabviews.deck_operations.DownloadedDeckChooserReader;
+import com.example.marc.materialtabviews.model.Deck;
 
 import java.util.ArrayList;
 

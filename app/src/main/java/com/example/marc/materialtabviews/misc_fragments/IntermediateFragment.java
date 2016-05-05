@@ -1,7 +1,9 @@
-package com.example.marc.materialtabviews;
+package com.example.marc.materialtabviews.misc_fragments;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+
+import com.example.marc.materialtabviews.R;
 
 public abstract class IntermediateFragment extends Fragment {
 

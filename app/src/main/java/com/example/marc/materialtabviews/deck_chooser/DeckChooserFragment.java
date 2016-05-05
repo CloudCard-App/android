@@ -1,4 +1,4 @@
-package com.example.marc.materialtabviews;
+package com.example.marc.materialtabviews.deck_chooser;
 
 import android.app.FragmentManager;
 import android.app.ListFragment;
@@ -9,6 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.example.marc.materialtabviews.OnTaskCompleted;
+import com.example.marc.materialtabviews.R;
+import com.example.marc.materialtabviews.card_quiz.CardQuizFragment;
+import com.example.marc.materialtabviews.misc_fragments.EnterCodeFragment;
+import com.example.marc.materialtabviews.model.Deck;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,10 +43,7 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        // Set the adapter of the view to the schoolNameList
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_list_item_1, deckNameList);
+        setListAdapter();
 
         // This is the key to the lookup spreadsheet.
         // It contains deck names and their corresponding keys.
@@ -55,6 +58,12 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
         DeckChooserDownloader downloader = new DeckChooserDownloader(key, fileName, this);
         downloader.execute();
 
+    }
+
+    protected void setListAdapter() {
+        // Set the adapter of the view to the schoolNameList
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_list_item_1, deckNameList);
         setListAdapter(adapter);
     }
 
@@ -132,10 +141,7 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
         // TODO Maybe look into casting into a BaseAdapter, and then calling something like
         // TODO notifyDataSetChanged().
         try {
-            ArrayAdapter<String> newAdapter = new ArrayAdapter<>(getActivity(),
-                    android.R.layout.simple_list_item_1, deckNameList);
-            // Set the adapter again.
-            setListAdapter(newAdapter);
+            setListAdapter();
         } catch (NullPointerException npe) {
             Log.d("DeckChooserFragment", "No data received from deckdownloader.");
             npe.printStackTrace();

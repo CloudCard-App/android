@@ -1,10 +1,12 @@
-package com.example.marc.materialtabviews;
+package com.example.marc.materialtabviews.misc_fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.marc.materialtabviews.R;
 
 public class DefaultFragment extends Fragment {
 

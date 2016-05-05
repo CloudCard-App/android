@@ -14,7 +14,7 @@
 
     <fragment
         android:id="@+id/container"
-        class="com.example.marc.materialtabviews.DefaultFragment"
+        class="com.example.marc.materialtabviews.misc_fragments.DefaultFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"

@@ -1,4 +1,7 @@
-package com.example.marc.materialtabviews;
+package com.example.marc.materialtabviews.card_quiz;
+
+import com.example.marc.materialtabviews.model.Card;
+import com.example.marc.materialtabviews.deck_operations.DownloadedDeckParser;
 
 import org.json.simple.JSONObject;
 

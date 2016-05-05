@@ -12,6 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.marc.materialtabviews.deck_chooser.DeckChooserFragment;
+import com.example.marc.materialtabviews.misc_fragments.DefaultFragment;
+import com.example.marc.materialtabviews.your_decks.YourDecksFragment;
 import com.instabug.library.Instabug;
 import com.instabug.wrapper.support.activity.InstabugAppCompatActivity;
 

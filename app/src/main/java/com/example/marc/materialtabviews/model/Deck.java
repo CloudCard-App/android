@@ -1,4 +1,4 @@
-package com.example.marc.materialtabviews;
+package com.example.marc.materialtabviews.model;
 
 import android.support.annotation.NonNull;
 

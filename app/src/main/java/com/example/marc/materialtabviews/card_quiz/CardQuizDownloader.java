@@ -1,4 +1,9 @@
-package com.example.marc.materialtabviews;
+package com.example.marc.materialtabviews.card_quiz;
+
+import com.example.marc.materialtabviews.model.Card;
+import com.example.marc.materialtabviews.model.DeckWithContents;
+import com.example.marc.materialtabviews.Downloader;
+import com.example.marc.materialtabviews.OnTaskCompleted;
 
 import java.util.ArrayList;
 import java.util.List;

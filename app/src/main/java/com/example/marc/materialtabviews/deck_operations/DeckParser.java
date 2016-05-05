@@ -1,4 +1,6 @@
-package com.example.marc.materialtabviews;
+package com.example.marc.materialtabviews.deck_operations;
+
+import com.example.marc.materialtabviews.model.Deck;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -29,7 +31,7 @@ public class DeckParser {
         this.fileName = fileName;
     }
 
-    protected void initializeParsing() {
+    public void initializeParsing() {
         String pathToFile = "/flashofacts/" + fileName + ".json";
         File fileHere = new File(pathToFile);
 

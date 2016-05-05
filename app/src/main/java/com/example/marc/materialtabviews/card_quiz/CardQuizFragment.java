@@ -1,4 +1,4 @@
-package com.example.marc.materialtabviews;
+package com.example.marc.materialtabviews.card_quiz;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -16,7 +16,12 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.marc.materialtabviews.model.Card;
+import com.example.marc.materialtabviews.model.DeckWithContents;
+import com.example.marc.materialtabviews.OnTaskCompleted;
+import com.example.marc.materialtabviews.R;
 
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -232,7 +237,7 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
             cardDisplay.setText(cardData.get(currentIndex).getBack());
             cardBackground.setImageResource(R.mipmap.yellow_card);
         }
-        numDisplay.setText(String.valueOf(currentIndex + 1) + " / " + totalLength);
+        numDisplay.setText(MessageFormat.format("{0} / {1}", String.valueOf(currentIndex + 1), totalLength));
         progressSelect.setProgress(currentIndex); // Wee-Wee!
     }
 

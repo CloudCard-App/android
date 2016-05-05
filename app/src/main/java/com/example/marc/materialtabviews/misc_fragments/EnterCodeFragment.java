@@ -1,4 +1,4 @@
-package com.example.marc.materialtabviews;
+package com.example.marc.materialtabviews.misc_fragments;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.marc.materialtabviews.R;
 
 public class EnterCodeFragment extends IntermediateFragment {
 

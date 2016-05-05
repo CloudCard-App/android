@@ -1,6 +1,8 @@
-package com.example.marc.materialtabviews;
+package com.example.marc.materialtabviews.deck_operations;
 
 import android.support.annotation.NonNull;
+
+import com.example.marc.materialtabviews.model.Deck;
 
 import org.json.simple.JSONObject;
 
