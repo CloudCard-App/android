@@ -41,10 +41,12 @@ public abstract class Downloader extends AsyncTask<String, Integer, String> {
             // https:// docs.google.com/spreadsheets/d/**** insert key here ****/edit#gid=0
 
             // flashofacts is the directory under which we store our files.
-            String filePath = "/flashofacts/" + getFileName() + ".json";
+            String filePath = R.string.appDirectory + getFileName() + ".json";
             System.out.println("downloadTheSheet filePath = " + filePath);
             File jsonOutput = new File(android.os.Environment.getExternalStorageDirectory(),
                     filePath);
+
+            System.out.println("Created new file: " + jsonOutput.createNewFile());
 
             FileUtils.write(jsonOutput, "");
             FileUtils.copyURLToFile(spreadsheetURL, jsonOutput);

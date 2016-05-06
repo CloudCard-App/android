@@ -14,7 +14,7 @@ import android.view.MenuItem;
 
 import com.example.marc.materialtabviews.deck_chooser.DeckChooserFragment;
 import com.example.marc.materialtabviews.misc_fragments.DefaultFragment;
-import com.example.marc.materialtabviews.your_decks.YourDecksFragment;
+import com.example.marc.materialtabviews.your_decks.YourDecksChooserFragment;
 import com.instabug.library.Instabug;
 import com.instabug.wrapper.support.activity.InstabugAppCompatActivity;
 
@@ -100,7 +100,7 @@ public class MainActivity extends InstabugAppCompatActivity
         if (id == R.id.nav_deckfinder) {
             fragment = new DeckChooserFragment();
         } else if (id == R.id.nav_yourdecks) {
-            fragment = new YourDecksFragment();
+            fragment = new YourDecksChooserFragment();
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {

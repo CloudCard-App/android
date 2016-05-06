@@ -22,6 +22,7 @@ import com.example.marc.materialtabviews.OnTaskCompleted;
 import com.example.marc.materialtabviews.R;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,8 +38,13 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
     private int currentIndex = -1; // It doesn't have any index yet, before it starts.
     private int totalLength;
     private DeckWithContents deckWithContents = new DeckWithContents();
+    private boolean shouldDownload = true;
 
     public CardQuizFragment() {
+    }
+
+    public void setShouldDownload(boolean shouldDownload) {
+        this.shouldDownload = shouldDownload;
     }
 
     public void setName(String name) {
@@ -142,12 +148,34 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
         nextButton = (ImageButton) getView().findViewById(R.id.nextButton);
         backButton = (ImageButton) getView().findViewById(R.id.backButton);
 
-        // Create the downloader, passing in this as the OnTaskCompleted listener
-        CardQuizDownloader downloader = new CardQuizDownloader(deckWithContents.getName(),
-                deckWithContents.getKey(), deckWithContents.getCode(), deckWithContents.getName(), this);
+        if (shouldDownload) {
+            // Create the downloader, passing in this as the OnTaskCompleted listener
+            CardQuizDownloader downloader = new CardQuizDownloader(deckWithContents.getName(),
+                    deckWithContents.getKey(), deckWithContents.getCode(), deckWithContents.getName(), this);
 
-        // Do in background stuffs.
-        downloader.execute();
+            // Do in background stuffs.
+            downloader.execute();
+        } else {
+            // Deck name is also the file name
+            CardQuizReader reader = new CardQuizReader(deckWithContents.getName());
+            ArrayList<Card> cardList = new ArrayList<>();
+
+            while (reader.hasNext()) {
+                Card thisCard = (Card) reader.getNext();
+                cardList.add(thisCard);
+            }
+
+            deckWithContents.setCards(cardList);
+            List<Object> resultDeckList = new ArrayList<>();
+            resultDeckList.add(deckWithContents);
+            this.onTaskCompleted(resultDeckList);
+        }
+    }
+
+    public void setData(DeckWithContents data) {
+        List<Object> dataList = new ArrayList<>();
+        dataList.add(data);
+        onTaskCompleted(dataList);
     }
 
     /**
@@ -158,7 +186,7 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
     @Override
     public void onTaskCompleted(List<Object> data) {
 
-        cardDisplay.setText("Swipe left to start!");
+        cardDisplay.setText(R.string.swipeToStart);
 
         DeckWithContents deck = (DeckWithContents) data.get(0);
         deckWithContents = deck;

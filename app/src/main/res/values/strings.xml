@@ -9,5 +9,7 @@
     <string name="correctCode">Correct code</string>
     <string name="incorrectCode">Incorrect code</string>
     <string name="cloudcard">CloudCard</string>
+    <string name="appDirectory">/CloudCard/</string>
+    <string name="swipeToStart">Swipe left to start!</string>
 
 </resources>

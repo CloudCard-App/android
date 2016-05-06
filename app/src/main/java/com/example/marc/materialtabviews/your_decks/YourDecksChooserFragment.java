@@ -3,6 +3,7 @@ package com.example.marc.materialtabviews.your_decks;
 import android.app.FragmentManager;
 import android.app.ListFragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,6 @@ import android.widget.ListView;
 
 import com.example.marc.materialtabviews.R;
 import com.example.marc.materialtabviews.card_quiz.CardQuizFragment;
-import com.example.marc.materialtabviews.deck_operations.DownloadedDeckChooserReader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,8 @@ import java.util.List;
 public class YourDecksChooserFragment extends ListFragment {
 
     List<String> deckNameList = new ArrayList<>();
+
+    private final String TAG = "YourDecksChooser";
 
     public YourDecksChooserFragment() {
 
@@ -29,6 +31,7 @@ public class YourDecksChooserFragment extends ListFragment {
         if (container != null) {
             container.removeAllViews();
         }
+        Log.i(TAG, "Created view successfully");
         return inflater.inflate(R.layout.deck_chooser_fragment, container, false);
     }
 
@@ -36,33 +39,40 @@ public class YourDecksChooserFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        YourDeckLister lister = new YourDeckLister("./");
+        Log.i(TAG, "Activity created");
+        YourDeckLister lister = new YourDeckLister("/flashofacts/");
+        Log.i(TAG, "Lister created");
 
         deckNameList = lister.getListOfSheets();
+        Log.i(TAG, "Got list of sheets from lister");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_list_item_1, deckNameList);
+        setListAdapter(adapter);
+        Log.i(TAG, "Set list adapter");
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        /* String fileName = deckNameList.get((int) id);
-        DownloadedDeckChooserReader reader = new DownloadedDeckChooserReader(fileName);
+        String fileName = deckNameList.get((int) id);
+//        DownloadedDeckChooserReader reader = new DownloadedDeckChooserReader(fileName);
 //        Deck selection = reader.getNext(); // WRONG
 
 //        Deck selection = deckList.get((int) id); // Gets the clicked place.
-        String key = selection.getKey(); // Gets the key of the clicked place.
-        String correctCode = selection.getCode();
-
-        System.out.println("selection = " + selection);
-        System.out.println("key = " + key);
-        System.out.println("code = " + correctCode);
+//        String key = selection.getKey(); // Gets the key of the clicked place.
+//        String correctCode = selection.getCode();
+//
+//        System.out.println("selection = " + selection);
+//        System.out.println("key = " + key);
+//        System.out.println("code = " + correctCode);
 
         // TODO Look into using bundles
         CardQuizFragment cardQuiz = new CardQuizFragment();
-        cardQuiz.setName(selection.getName());
-        cardQuiz.setKey(selection.getKey()); // Sets the key.
-        cardQuiz.setCode(selection.getCode());
+        cardQuiz.setName(deckNameList.get((int) id));
+        cardQuiz.setShouldDownload(false);
+
+//        cardQuiz.setKey(selection.getKey()); // Sets the key.
+//        cardQuiz.setCode(selection.getCode());
 
         // We can get a fragment manager from the Fragment superclass
         FragmentManager fragmentManager = getFragmentManager();
@@ -73,6 +83,5 @@ public class YourDecksChooserFragment extends ListFragment {
                 .replace(R.id.container, cardQuiz)
                 .commit();
         System.out.println("Finished committing fragment transaction!");
-        */
     }
 }
