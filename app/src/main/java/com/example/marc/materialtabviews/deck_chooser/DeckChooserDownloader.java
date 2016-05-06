@@ -18,8 +18,6 @@ public class DeckChooserDownloader extends Downloader {
     // Actually, this runs on the **main** thread
     // Weee!
     protected void onPostExecute(String result) {
-
-        System.out.println("onPostExecute fileName = " + getFileName());
         DownloadedDeckChooserReader reader = new DownloadedDeckChooserReader(getFileName());
         ArrayList<Object> deckList = new ArrayList<>();
 
@@ -27,7 +25,6 @@ public class DeckChooserDownloader extends Downloader {
             Deck thisDeck = (Deck) reader.getNext();
             deckList.add(thisDeck);
         }
-
         completionWaiter.onTaskCompleted(deckList);
     }
 

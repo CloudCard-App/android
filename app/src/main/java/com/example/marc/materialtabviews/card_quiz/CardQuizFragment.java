@@ -231,7 +231,6 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
     }
 
     private void previousCard() {
-        System.out.println("CardQuizFragment.previousCard");
         if (currentIndex > 0) { // If we're not at the beginning
             currentIndex--;
             updateCard(true);
@@ -239,7 +238,6 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
     }
 
     private void flipCard() {
-        System.out.println("CardQuizFragment.flipCard");
         List<Card> cardData = deckWithContents.getCards();
         if (cardDisplay.getText().equals(cardData.get(currentIndex).getFront())) {
             updateCard(false); // Switch to back
@@ -250,7 +248,6 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
     }
 
     private void nextCard() {
-        System.out.println("CardQuizFragment.nextCard");
         List<Card> cardData = deckWithContents.getCards();
         if (currentIndex < cardData.size() - 1) { // If we're not at the end
             currentIndex++;
@@ -297,7 +294,6 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
                 // the POST parameters:
                 params.put("code", code);
                 params.put("action", action);
-                System.out.println("Posting! Code = " + code + " | Action = " + action);
                 return params;
             }
         };

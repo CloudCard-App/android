@@ -45,21 +45,16 @@ public class DeckParser {
             }
         } catch (ParseException pe) {
             // Thrown by the parser.parse DownloadedDeckParser
-            System.out.println("DeckParser.initializeParsing ParseException");
             pe.printStackTrace();
         } catch (FileNotFoundException fnfe) {
             // If file does not exist
             // TODO: Create file if it does not exist
-            System.out.println("FileNotFoundException for file " + pathToFile);
         } catch (IOException ioe) {
             // Thrown possibly by the getExternalStorageDirectory if we don't
             // have proper permissions.
-            System.out.println("DeckParser.initializeParsing IOException");
             ioe.printStackTrace();
         } finally {
-            if (obj == null) { // We should handle this better.
-                System.out.println("Object was null in DeckParser. Exiting now!");
-//                System.exit(-1); // Oh my.
+            if (obj == null) {
                 deckIterator = null;
             } else {
                 JSONArray deckArray = (JSONArray) obj;

@@ -17,7 +17,7 @@ public class YourDeckLister {
     }
 
     public List<String> getListOfSheets() {
-        File folder = new File(Environment.getExternalStorageDirectory().toString()+"/flashofacts/");
+        File folder = new File(Environment.getExternalStorageDirectory().toString() + directory);
         Log.i(TAG, "Found Directory");
         File[] listOfFiles = folder.listFiles();
         Log.i(TAG, "Got list of files");

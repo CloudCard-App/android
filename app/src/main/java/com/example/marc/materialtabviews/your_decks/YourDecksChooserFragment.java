@@ -54,25 +54,9 @@ public class YourDecksChooserFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        String fileName = deckNameList.get((int) id);
-//        DownloadedDeckChooserReader reader = new DownloadedDeckChooserReader(fileName);
-//        Deck selection = reader.getNext(); // WRONG
-
-//        Deck selection = deckList.get((int) id); // Gets the clicked place.
-//        String key = selection.getKey(); // Gets the key of the clicked place.
-//        String correctCode = selection.getCode();
-//
-//        System.out.println("selection = " + selection);
-//        System.out.println("key = " + key);
-//        System.out.println("code = " + correctCode);
-
-        // TODO Look into using bundles
         CardQuizFragment cardQuiz = new CardQuizFragment();
         cardQuiz.setName(deckNameList.get((int) id));
         cardQuiz.setShouldDownload(false);
-
-//        cardQuiz.setKey(selection.getKey()); // Sets the key.
-//        cardQuiz.setCode(selection.getCode());
 
         // We can get a fragment manager from the Fragment superclass
         FragmentManager fragmentManager = getFragmentManager();
@@ -82,6 +66,5 @@ public class YourDecksChooserFragment extends ListFragment {
         fragmentManager.beginTransaction()
                 .replace(R.id.container, cardQuiz)
                 .commit();
-        System.out.println("Finished committing fragment transaction!");
     }
 }

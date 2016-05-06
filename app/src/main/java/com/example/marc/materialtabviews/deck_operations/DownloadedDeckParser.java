@@ -30,34 +30,25 @@ public abstract class DownloadedDeckParser {
                     getExternalStorageDirectory() + pathToFile));
         } catch (ParseException pe) {
             // Thrown by the parser.parse DownloadedDeckParser
-            System.out.println("ParseException for " + pathToFile);
             pe.printStackTrace();
         } catch (FileNotFoundException fnfe) {
             // Thrown if file does not exist.
             // TODO: Create file if not exist
-            System.out.println("File Not found exception for " + pathToFile);
             fnfe.printStackTrace();
         } catch (IOException ioe) {
             // Thrown possibly by the getExternalStorageDirectory if we don't
             // have proper permissions.
-            System.out.println("IOException for file " + pathToFile);
             ioe.printStackTrace();
         } finally {
             if (obj == null) { // We should handle this better.
-                System.out.println("Object was null in DownloadedDeckParser. Exiting now!");
                 System.exit(-1); // Oh my.
             }
         }
 
         JSONObject jsonObject = (JSONObject) obj;
-
         JSONObject table = (JSONObject) jsonObject.get("table");
-        System.out.println("table: " + table);
 
         rows = (JSONArray) table.get("rows");
-        System.out.println("rows: " + rows);
-        System.out.println();
-
         rowIterator = rows.iterator();
     }
 

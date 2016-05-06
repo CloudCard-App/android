@@ -77,14 +77,9 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
      * @param id       Row id of the clicked item
      */
     public void onListItemClick(ListView l, View v, int position, long id) {
-        System.out.println("DeckChooserFragment.onListItemClick");
         Deck selection = deckList.get((int) id); // Gets the clicked place.
         String key = selection.getKey(); // Gets the key of the clicked place.
         String correctCode = selection.getCode();
-
-        System.out.println("selection = " + selection);
-        System.out.println("key = " + key);
-        System.out.println("code = " + correctCode);
 
         // TODO Look into using bundles
         CardQuizFragment cardQuiz = new CardQuizFragment();
@@ -106,8 +101,6 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
         fragmentManager.beginTransaction()
                 .replace(R.id.container, codeAuth)
                 .commit();
-        System.out.println("Finished committing fragment transaction!");
-
     }
 
     @Override
