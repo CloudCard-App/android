@@ -1,5 +1,6 @@
 package com.example.marc.materialtabviews.your_decks;
 
+import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
@@ -16,7 +17,7 @@ public class YourDeckLister {
     }
 
     public List<String> getListOfSheets() {
-        File folder = new File(directory);
+        File folder = new File(Environment.getExternalStorageDirectory().toString()+"/flashofacts/");
         Log.i(TAG, "Found Directory");
         File[] listOfFiles = folder.listFiles();
         Log.i(TAG, "Got list of files");

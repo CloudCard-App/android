@@ -29,6 +29,7 @@ import java.util.Map;
 
 public class CardQuizFragment extends Fragment implements OnTaskCompleted {
 
+    private static final String TAG = "CardQuizFragment";
     private TextView cardDisplay;
     private TextView numDisplay;
     private ImageView cardBackground;
@@ -156,6 +157,7 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
             // Do in background stuffs.
             downloader.execute();
         } else {
+            Log.i(TAG, "File name = " + deckWithContents.getName());
             // Deck name is also the file name
             CardQuizReader reader = new CardQuizReader(deckWithContents.getName());
             ArrayList<Card> cardList = new ArrayList<>();
