@@ -40,7 +40,7 @@ public class YourDecksChooserFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
 
         Log.i(TAG, "Activity created");
-        YourDeckLister lister = new YourDeckLister("/flashofacts/");
+        YourDeckLister lister = new YourDeckLister(getString(R.string.appDirectory));
         Log.i(TAG, "Lister created");
 
         deckNameList = lister.getListOfSheets();

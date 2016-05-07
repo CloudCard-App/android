@@ -47,11 +47,11 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
 
         // This is the key to the lookup spreadsheet.
         // It contains deck names and their corresponding keys.
-        String key = "1Zs0ydpL1twVTgUNi_h9b4KHRafrTMnUljOorwdfBm8I";
+        String key = getString(R.string.deckListSheetKey);
 
         // This is the file where we will save the JSON of the lookup spreadsheet.
-        String fileName = "decks";
-
+        String fileName = getString(R.string.appDirectory) + "decks" + getString(R.string.dotJson);
+        
         // This is used for the OnTaskCompleted interface
         // When it completes everything, it calls onTaskCompleted
         // And passes the arrayList of Deck as data.

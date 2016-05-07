@@ -1,5 +1,7 @@
 package com.example.marc.materialtabviews.card_quiz;
 
+import android.util.Log;
+
 import com.example.marc.materialtabviews.model.Card;
 import com.example.marc.materialtabviews.model.DeckWithContents;
 import com.example.marc.materialtabviews.Downloader;
@@ -8,13 +10,18 @@ import com.example.marc.materialtabviews.OnTaskCompleted;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Downloads a deck of cards.
+ */
 public class CardQuizDownloader extends Downloader {
 
+    private final String TAG = "CardQuizDownloader";
     private DeckWithContents deckWithContents = null;
 
-    public CardQuizDownloader(String name, String key, String code, String fileName,
+    public CardQuizDownloader(String name, String key, String code, String filePath,
                               OnTaskCompleted completionWaiter) {
-        super(fileName, completionWaiter, key);
+        super(filePath, completionWaiter, key);
+        Log.i(TAG, "FilePath = " + filePath);
         deckWithContents = new DeckWithContents(name, key, code, null);
     }
 
@@ -23,7 +30,7 @@ public class CardQuizDownloader extends Downloader {
     // Weee!
     protected void onPostExecute(String result) {
 
-        CardQuizReader reader = new CardQuizReader(getFileName());
+        CardQuizReader reader = new CardQuizReader(getFilePath());
         ArrayList<Card> cardList = new ArrayList<>();
 
         while (reader.hasNext()) {

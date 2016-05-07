@@ -151,15 +151,18 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
 
         if (shouldDownload) {
             // Create the downloader, passing in this as the OnTaskCompleted listener
+            String filePath = getString(R.string.appDirectory) + deckWithContents.getName();
+            Log.i(TAG, "FilePath = " + filePath);
             CardQuizDownloader downloader = new CardQuizDownloader(deckWithContents.getName(),
-                    deckWithContents.getKey(), deckWithContents.getCode(), deckWithContents.getName(), this);
+                    deckWithContents.getKey(), deckWithContents.getCode(), filePath, this);
 
             // Do in background stuffs.
             downloader.execute();
         } else {
-            Log.i(TAG, "File name = " + deckWithContents.getName());
+            String filePath = getString(R.string.appDirectory) + deckWithContents.getName();
+            Log.i(TAG, "File path = " + filePath);
             // Deck name is also the file name
-            CardQuizReader reader = new CardQuizReader(deckWithContents.getName());
+            CardQuizReader reader = new CardQuizReader(filePath);
             ArrayList<Card> cardList = new ArrayList<>();
 
             while (reader.hasNext()) {

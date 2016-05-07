@@ -1,6 +1,7 @@
 package com.example.marc.materialtabviews;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.apache.commons.io.FileUtils;
 
@@ -10,12 +11,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public abstract class Downloader extends AsyncTask<String, Integer, String> {
+
+    private final String TAG = "Downloader";
     protected OnTaskCompleted completionWaiter;
     private String key = "";
-    private String fileName = "";
+    private String filePath = "";
 
-    public Downloader(String fileName, OnTaskCompleted completionWaiter, String key) {
-        this.fileName = fileName;
+    public Downloader(String filePath, OnTaskCompleted completionWaiter, String key) {
+        Log.i(TAG, "File path for downloader = " + filePath);
+        this.filePath = filePath;
         this.completionWaiter = completionWaiter;
         this.key = key;
     }
@@ -33,9 +37,8 @@ public abstract class Downloader extends AsyncTask<String, Integer, String> {
             // To get the editable spreadsheet, insert the key:
             // https:// docs.google.com/spreadsheets/d/**** insert key here ****/edit#gid=0
 
-            String filePath = R.string.appDirectory + getFileName() + ".json";
             File jsonOutput = new File(android.os.Environment.getExternalStorageDirectory(),
-                    filePath);
+                    getFilePath());
 
             FileUtils.write(jsonOutput, "");
             FileUtils.copyURLToFile(spreadsheetURL, jsonOutput);
@@ -46,8 +49,6 @@ public abstract class Downloader extends AsyncTask<String, Integer, String> {
             String substringed = fileString.substring(indexOfStartJSON, indexOfEndJSON);
 
             FileUtils.write(jsonOutput, substringed);
-        } catch (MalformedURLException murle) {
-            murle.printStackTrace();
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -68,8 +69,8 @@ public abstract class Downloader extends AsyncTask<String, Integer, String> {
     // Actually, this runs on the **main** thread
     protected abstract void onPostExecute(String result);
 
-    protected String getFileName() {
-        return fileName;
+    protected String getFilePath() {
+        return filePath;
     }
 
     private String getKey() {

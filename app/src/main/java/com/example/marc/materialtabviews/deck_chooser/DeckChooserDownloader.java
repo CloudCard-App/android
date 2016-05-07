@@ -7,6 +7,9 @@ import com.example.marc.materialtabviews.model.Deck;
 
 import java.util.ArrayList;
 
+/**
+ * Downloads the list of decks, keys, and codes.
+ */
 public class DeckChooserDownloader extends Downloader {
 
     public DeckChooserDownloader(String key, String fileName,
@@ -18,7 +21,7 @@ public class DeckChooserDownloader extends Downloader {
     // Actually, this runs on the **main** thread
     // Weee!
     protected void onPostExecute(String result) {
-        DownloadedDeckChooserReader reader = new DownloadedDeckChooserReader(getFileName());
+        DownloadedDeckChooserReader reader = new DownloadedDeckChooserReader(getFilePath());
         ArrayList<Object> deckList = new ArrayList<>();
 
         while (reader.hasNext()) {

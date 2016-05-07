@@ -1,33 +1,37 @@
 package com.example.marc.materialtabviews.deck_operations;
 
+import android.util.Log;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 
 public abstract class DownloadedDeckParser {
+    private final String TAG = "DownloadedDeckParser";
     protected org.json.simple.parser.JSONParser parser = null;
     private Iterator<?> rowIterator = null;
-    private String fileName = "";
+    private String pathToFile = "";
     private Object obj = null;
     private JSONArray rows = null;
 
-    public DownloadedDeckParser(String fileName) {
-        this.fileName = fileName;
+    public DownloadedDeckParser(String pathToFile) {
+        this.pathToFile = pathToFile;
         parser = new org.json.simple.parser.JSONParser();
     }
 
     protected void initializeParsing() {
-        String pathToFile = "/flashofacts/" + fileName + ".json";
+        Log.i(TAG, "Path to file = " + pathToFile);
         try {
             // Initializes parsing
-            obj = parser.parse(new FileReader(android.os.Environment.
-                    getExternalStorageDirectory() + pathToFile));
+            String totalFilePath = android.os.Environment.getExternalStorageDirectory()
+                    + "/" + pathToFile;
+            Log.i(TAG, "TotalFilePath = " + totalFilePath);
+            obj = parser.parse(new FileReader(totalFilePath));
         } catch (ParseException pe) {
             // Thrown by the parser.parse DownloadedDeckParser
             pe.printStackTrace();
