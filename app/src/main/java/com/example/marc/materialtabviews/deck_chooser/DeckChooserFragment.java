@@ -22,6 +22,7 @@ import java.util.List;
 
 public class DeckChooserFragment extends ListFragment implements OnTaskCompleted {
 
+    private static final String TAG = "DeckChooserFragment";
     private ArrayList<Deck> deckList = new ArrayList<>();
     private ArrayList<String> deckNameList = new ArrayList<>();
 
@@ -51,7 +52,7 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
 
         // This is the file where we will save the JSON of the lookup spreadsheet.
         String fileName = getString(R.string.appDirectory) + "decks" + getString(R.string.dotJson);
-        
+
         // This is used for the OnTaskCompleted interface
         // When it completes everything, it calls onTaskCompleted
         // And passes the arrayList of Deck as data.
@@ -136,7 +137,7 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
         try {
             setListAdapter();
         } catch (NullPointerException npe) {
-            Log.d("DeckChooserFragment", "No data received from deckdownloader.");
+            Log.w(TAG, "No data received from deckdownloader.");
             npe.printStackTrace();
         }
     }

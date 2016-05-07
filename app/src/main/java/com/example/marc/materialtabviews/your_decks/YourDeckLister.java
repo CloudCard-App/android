@@ -1,7 +1,6 @@
 package com.example.marc.materialtabviews.your_decks;
 
 import android.os.Environment;
-import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -18,13 +17,10 @@ public class YourDeckLister {
 
     public List<String> getListOfSheets() {
         File folder = new File(Environment.getExternalStorageDirectory().toString() + directory);
-        Log.i(TAG, "Found Directory");
         File[] listOfFiles = folder.listFiles();
-        Log.i(TAG, "Got list of files");
         List<String> fileNames = new ArrayList<>();
-        Log.i(TAG, "Created list of fileNames");
         for (File each : listOfFiles) {
-            if (each.isFile()) {
+            if (each.isFile() && !each.getName().equals("decks.json")) {
                 fileNames.add(each.getName());
             }
         }

@@ -1,7 +1,5 @@
 package com.example.marc.materialtabviews.deck_operations;
 
-import android.util.Log;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -25,12 +23,10 @@ public abstract class DownloadedDeckParser {
     }
 
     protected void initializeParsing() {
-        Log.i(TAG, "Path to file = " + pathToFile);
         try {
             // Initializes parsing
             String totalFilePath = android.os.Environment.getExternalStorageDirectory()
                     + "/" + pathToFile;
-            Log.i(TAG, "TotalFilePath = " + totalFilePath);
             obj = parser.parse(new FileReader(totalFilePath));
         } catch (ParseException pe) {
             // Thrown by the parser.parse DownloadedDeckParser

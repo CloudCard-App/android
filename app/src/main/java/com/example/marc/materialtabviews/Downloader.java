@@ -1,13 +1,11 @@
 package com.example.marc.materialtabviews;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public abstract class Downloader extends AsyncTask<String, Integer, String> {
@@ -18,7 +16,6 @@ public abstract class Downloader extends AsyncTask<String, Integer, String> {
     private String filePath = "";
 
     public Downloader(String filePath, OnTaskCompleted completionWaiter, String key) {
-        Log.i(TAG, "File path for downloader = " + filePath);
         this.filePath = filePath;
         this.completionWaiter = completionWaiter;
         this.key = key;

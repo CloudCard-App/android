@@ -26,8 +26,8 @@ public class EnterCodeFragment extends IntermediateFragment {
     private EditText codeForm;
 
     /**
-    * Default constructor that doesn't setup the next or previous fragments.
-    */
+     * Default constructor that doesn't setup the next or previous fragments.
+     */
     public EnterCodeFragment() {
         super(null, null);
         correctCode = "";

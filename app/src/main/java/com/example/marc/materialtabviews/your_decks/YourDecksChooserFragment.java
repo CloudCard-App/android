@@ -3,7 +3,6 @@ package com.example.marc.materialtabviews.your_decks;
 import android.app.FragmentManager;
 import android.app.ListFragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +17,8 @@ import java.util.List;
 
 public class YourDecksChooserFragment extends ListFragment {
 
-    List<String> deckNameList = new ArrayList<>();
-
     private final String TAG = "YourDecksChooser";
+    List<String> deckNameList = new ArrayList<>();
 
     public YourDecksChooserFragment() {
 
@@ -31,7 +29,6 @@ public class YourDecksChooserFragment extends ListFragment {
         if (container != null) {
             container.removeAllViews();
         }
-        Log.i(TAG, "Created view successfully");
         return inflater.inflate(R.layout.deck_chooser_fragment, container, false);
     }
 
@@ -39,17 +36,12 @@ public class YourDecksChooserFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Log.i(TAG, "Activity created");
         YourDeckLister lister = new YourDeckLister(getString(R.string.appDirectory));
-        Log.i(TAG, "Lister created");
-
         deckNameList = lister.getListOfSheets();
-        Log.i(TAG, "Got list of sheets from lister");
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_list_item_1, deckNameList);
         setListAdapter(adapter);
-        Log.i(TAG, "Set list adapter");
     }
 
     @Override

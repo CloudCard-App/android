@@ -16,10 +16,10 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.marc.materialtabviews.model.Card;
-import com.example.marc.materialtabviews.model.DeckWithContents;
 import com.example.marc.materialtabviews.OnTaskCompleted;
 import com.example.marc.materialtabviews.R;
+import com.example.marc.materialtabviews.model.Card;
+import com.example.marc.materialtabviews.model.DeckWithContents;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -84,7 +84,6 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
         View view = inflater.inflate(R.layout.card_quiz_fragment, container, false);
 
         // Now that it's inflated, start recording the actions.
-        Log.i("CardQuizFragment", "Started viewing card!");
 
         final GestureDetector gesture = new GestureDetector(getActivity(),
                 new GestureDetector.SimpleOnGestureListener() {
@@ -97,24 +96,23 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
                     @Override
                     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
                                            float velocityY) {
-                        Log.i("cardQuizFragment", "onFling has been called!");
                         final int SWIPE_MIN_DISTANCE = 120;
                         final int SWIPE_THRESHOLD_VELOCITY = 200;
                         try {
                             if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
                                     && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                                Log.i("cardQuizFragment", "Right to Left");
+                                Log.i(TAG, "Right to Left");
                                 nextCard();
                             } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
                                     && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                                Log.i("cardQuizFragment", "Left to Right");
+                                Log.i(TAG, "Left to Right");
                                 previousCard();
                             } else {
-                                Log.i("cardQuizFragment", "Tippedy-tapped!");
+                                Log.i(TAG, "Tippedy-tapped!");
                                 flipCard();
                             }
                         } catch (Exception e) {
-                            // nothing
+                            Log.wtf(TAG, "Wt actual f");
                         }
                         return super.onFling(e1, e2, velocityX, velocityY);
                     }
@@ -152,7 +150,6 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
         if (shouldDownload) {
             // Create the downloader, passing in this as the OnTaskCompleted listener
             String filePath = getString(R.string.appDirectory) + deckWithContents.getName();
-            Log.i(TAG, "FilePath = " + filePath);
             CardQuizDownloader downloader = new CardQuizDownloader(deckWithContents.getName(),
                     deckWithContents.getKey(), deckWithContents.getCode(), filePath, this);
 
@@ -160,7 +157,6 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
             downloader.execute();
         } else {
             String filePath = getString(R.string.appDirectory) + deckWithContents.getName();
-            Log.i(TAG, "File path = " + filePath);
             // Deck name is also the file name
             CardQuizReader reader = new CardQuizReader(filePath);
             ArrayList<Card> cardList = new ArrayList<>();
@@ -274,7 +270,7 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
     @Override
     public void onStop() {
         // Record that the user has left.
-        Log.i("CardQuizFragment", "Stopped!");
+        Log.i(TAG, "User stopped studying");
         reportExitStudy(deckWithContents.getCode());
         super.onStop();
     }
