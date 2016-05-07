@@ -25,20 +25,23 @@ public class CardQuizDownloader extends Downloader {
     @Override
     // Actually, this runs on the **main** thread
     // Weee!
-    protected void onPostExecute(String result) {
+    protected void onPostExecute(Boolean result) {
+        if (result) {
+            CardQuizReader reader = new CardQuizReader(getFilePath());
+            ArrayList<Card> cardList = new ArrayList<>();
 
-        CardQuizReader reader = new CardQuizReader(getFilePath());
-        ArrayList<Card> cardList = new ArrayList<>();
+            while (reader.hasNext()) {
+                Card thisCard = (Card) reader.getNext();
+                cardList.add(thisCard);
+            }
 
-        while (reader.hasNext()) {
-            Card thisCard = (Card) reader.getNext();
-            cardList.add(thisCard);
+            deckWithContents.setCards(cardList);
+            List<Object> resultDeckList = new ArrayList<>();
+            resultDeckList.add(deckWithContents);
+            completionWaiter.onTaskCompleted(resultDeckList);
+        } else {
+            //TODO: Let the user know to use his cached decks
         }
-
-        deckWithContents.setCards(cardList);
-        List<Object> resultDeckList = new ArrayList<>();
-        resultDeckList.add(deckWithContents);
-        completionWaiter.onTaskCompleted(resultDeckList);
     }
 
 }

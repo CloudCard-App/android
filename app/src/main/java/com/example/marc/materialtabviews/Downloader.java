@@ -1,6 +1,7 @@
 package com.example.marc.materialtabviews;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.apache.commons.io.FileUtils;
 
@@ -8,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-public abstract class Downloader extends AsyncTask<String, Integer, String> {
+public abstract class Downloader extends AsyncTask<String, Integer, Boolean> {
 
     private final String TAG = "Downloader";
     protected OnTaskCompleted completionWaiter;
@@ -26,7 +27,12 @@ public abstract class Downloader extends AsyncTask<String, Integer, String> {
 
     }
 
-    protected void downloadTheSheet() {
+    /**
+     * Downloads the sheet and writes the contents into the filePath.
+     *
+     * @return True if download was successful; False if download failed
+     */
+    protected boolean downloadTheSheet() {
         try {
             String urlString = "https://spreadsheets.google.com/tq?key=" + getKey();
 
@@ -46,25 +52,29 @@ public abstract class Downloader extends AsyncTask<String, Integer, String> {
             String substringed = fileString.substring(indexOfStartJSON, indexOfEndJSON);
 
             FileUtils.write(jsonOutput, substringed);
+            return true;
         } catch (IOException ioe) {
+            Log.e(TAG, "IOException when writing to file");
+            Log.e(TAG, "FilePath = " + filePath);
             ioe.printStackTrace();
         }
-
+        Log.v(TAG, "Could not download deck due to network.");
+        return false;
     }
 
     @Override
     protected void onProgressUpdate(Integer... values) {
     }
 
+
     @Override
-    protected String doInBackground(String... params) {
-        downloadTheSheet();
-        return null;
+    protected Boolean doInBackground(String... params) {
+        return downloadTheSheet();
     }
 
     @Override
     // Actually, this runs on the **main** thread
-    protected abstract void onPostExecute(String result);
+    protected abstract void onPostExecute(Boolean result);
 
     protected String getFilePath() {
         return filePath;

@@ -20,15 +20,19 @@ public class DeckChooserDownloader extends Downloader {
     @Override
     // Actually, this runs on the **main** thread
     // Weee!
-    protected void onPostExecute(String result) {
-        DownloadedDeckChooserReader reader = new DownloadedDeckChooserReader(getFilePath());
-        ArrayList<Object> deckList = new ArrayList<>();
+    protected void onPostExecute(Boolean result) {
+        if (result) {
+            DownloadedDeckChooserReader reader = new DownloadedDeckChooserReader(getFilePath());
+            ArrayList<Object> deckList = new ArrayList<>();
 
-        while (reader.hasNext()) {
-            Deck thisDeck = (Deck) reader.getNext();
-            deckList.add(thisDeck);
+            while (reader.hasNext()) {
+                Deck thisDeck = (Deck) reader.getNext();
+                deckList.add(thisDeck);
+            }
+            completionWaiter.onTaskCompleted(deckList);
+        } else {
+            //TODO: Tell the user to use his cached decks
         }
-        completionWaiter.onTaskCompleted(deckList);
     }
 
 }

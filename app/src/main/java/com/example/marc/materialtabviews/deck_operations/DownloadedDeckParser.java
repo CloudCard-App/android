@@ -1,5 +1,7 @@
 package com.example.marc.materialtabviews.deck_operations;
 
+import android.util.Log;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -23,10 +25,10 @@ public abstract class DownloadedDeckParser {
     }
 
     protected void initializeParsing() {
+        String totalFilePath = android.os.Environment.getExternalStorageDirectory()
+                + "/" + pathToFile;
         try {
             // Initializes parsing
-            String totalFilePath = android.os.Environment.getExternalStorageDirectory()
-                    + "/" + pathToFile;
             obj = parser.parse(new FileReader(totalFilePath));
         } catch (ParseException pe) {
             // Thrown by the parser.parse DownloadedDeckParser
@@ -34,14 +36,18 @@ public abstract class DownloadedDeckParser {
         } catch (FileNotFoundException fnfe) {
             // Thrown if file does not exist.
             // TODO: Create file if not exist
+            Log.e(TAG, "Could not find file");
+            Log.e(TAG, "File path = " + totalFilePath);
             fnfe.printStackTrace();
         } catch (IOException ioe) {
             // Thrown possibly by the getExternalStorageDirectory if we don't
             // have proper permissions.
+            Log.e(TAG, "IOException coming right up");
+            Log.e(TAG, "File path = " + totalFilePath);
             ioe.printStackTrace();
         } finally {
             if (obj == null) { // We should handle this better.
-                System.exit(-1); // Oh my.
+                Log.e(TAG, "Exception occurred in parsing JSON");
             }
         }
 
