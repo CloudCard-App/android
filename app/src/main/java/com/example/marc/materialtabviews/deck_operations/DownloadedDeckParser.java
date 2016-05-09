@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.util.Iterator;
 
 public abstract class DownloadedDeckParser {
+    public static final String JSONOBJECT_TABLE_KEY = "table";
+    public static final String JSONOBJECT_ROW_KEY = "rows";
+    public static final String JSONOBJECT_C_ARRAY = "c";
     private final String TAG = "DownloadedDeckParser";
     protected org.json.simple.parser.JSONParser parser = null;
     private Iterator<?> rowIterator = null;
@@ -52,16 +55,16 @@ public abstract class DownloadedDeckParser {
         }
 
         JSONObject jsonObject = (JSONObject) obj;
-        JSONObject table = (JSONObject) jsonObject.get("table");
+        JSONObject table = (JSONObject) jsonObject.get(JSONOBJECT_TABLE_KEY);
 
-        rows = (JSONArray) table.get("rows");
+        rows = (JSONArray) table.get(JSONOBJECT_ROW_KEY);
         rowIterator = rows.iterator();
     }
 
     public Object getNext() {
         if (rowIterator.hasNext()) {
             JSONObject next = (JSONObject) rowIterator.next();
-            JSONArray name = (JSONArray) next.get("c"); // Gets c
+            JSONArray name = (JSONArray) next.get(JSONOBJECT_C_ARRAY); // Gets c
             Iterator<?> values = name.iterator();
 
             int count = 0;

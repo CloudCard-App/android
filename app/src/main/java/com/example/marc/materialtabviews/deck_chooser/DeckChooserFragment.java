@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.marc.materialtabviews.Downloader;
 import com.example.marc.materialtabviews.OnTaskCompleted;
 import com.example.marc.materialtabviews.R;
 import com.example.marc.materialtabviews.card_quiz.CardQuizFragment;
@@ -22,6 +23,7 @@ import java.util.List;
 
 public class DeckChooserFragment extends ListFragment implements OnTaskCompleted {
 
+    public static final String DECK_LIST_SHEET_KEY = "1Zs0ydpL1twVTgUNi_h9b4KHRafrTMnUljOorwdfBm8I";
     private static final String TAG = "DeckChooserFragment";
     private ArrayList<Deck> deckList = new ArrayList<>();
     private ArrayList<String> deckNameList = new ArrayList<>();
@@ -48,10 +50,10 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
 
         // This is the key to the lookup spreadsheet.
         // It contains deck names and their corresponding keys.
-        String key = getString(R.string.deckListSheetKey);
+        String key = DECK_LIST_SHEET_KEY;
 
         // This is the file where we will save the JSON of the lookup spreadsheet.
-        String fileName = getString(R.string.appDirectory) + "decks" + getString(R.string.dotJson);
+        String fileName = Downloader.APP_DIRECTORY + Downloader.DECK_JSON;
 
         // This is used for the OnTaskCompleted interface
         // When it completes everything, it calls onTaskCompleted

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.marc.materialtabviews.Downloader;
 import com.example.marc.materialtabviews.OnTaskCompleted;
 import com.example.marc.materialtabviews.R;
 import com.example.marc.materialtabviews.model.Card;
@@ -149,14 +150,14 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
 
         if (shouldDownload) {
             // Create the downloader, passing in this as the OnTaskCompleted listener
-            String filePath = getString(R.string.appDirectory) + deckWithContents.getName();
+            String filePath = Downloader.APP_DIRECTORY + deckWithContents.getName();
             CardQuizDownloader downloader = new CardQuizDownloader(deckWithContents.getName(),
                     deckWithContents.getKey(), deckWithContents.getCode(), filePath, this);
 
             // Do in background stuffs.
             downloader.execute();
         } else {
-            String filePath = getString(R.string.appDirectory) + deckWithContents.getName();
+            String filePath = Downloader.APP_DIRECTORY + deckWithContents.getName();
             // Deck name is also the file name
             CardQuizReader reader = new CardQuizReader(filePath);
             ArrayList<Card> cardList = new ArrayList<>();

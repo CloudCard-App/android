@@ -9,9 +9,6 @@
     <string name="correctCode">Correct code</string>
     <string name="incorrectCode">Incorrect code</string>
     <string name="cloudcard">CloudCard</string>
-    <string name="appDirectory">/CloudCard/</string>
     <string name="swipeToStart">Swipe left to start!</string>
-    <string name="dotJson">.json</string>
-    <string name="deckListSheetKey">1Zs0ydpL1twVTgUNi_h9b4KHRafrTMnUljOorwdfBm8I</string>
 
 </resources>

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.marc.materialtabviews.Downloader;
 import com.example.marc.materialtabviews.R;
 import com.example.marc.materialtabviews.card_quiz.CardQuizFragment;
 
@@ -36,7 +37,7 @@ public class YourDecksChooserFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        YourDeckLister lister = new YourDeckLister(getString(R.string.appDirectory));
+        YourDeckLister lister = new YourDeckLister(Downloader.APP_DIRECTORY);
         deckNameList = lister.getListOfSheets();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),

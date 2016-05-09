@@ -11,6 +11,9 @@ import java.net.URL;
 
 public abstract class Downloader extends AsyncTask<String, Integer, Boolean> {
 
+    public static final String APP_DIRECTORY = "/CloudCard/";
+    public static final String DECK_JSON = "deck.json";
+    private static final String URL_BASE = "https://spreadsheets.google.com/tq?key=";
     private final String TAG = "Downloader";
     protected OnTaskCompleted completionWaiter;
     private String key = "";
@@ -34,7 +37,7 @@ public abstract class Downloader extends AsyncTask<String, Integer, Boolean> {
      */
     protected boolean downloadTheSheet() {
         try {
-            String urlString = "https://spreadsheets.google.com/tq?key=" + getKey();
+            String urlString = URL_BASE + getKey();
 
             URL spreadsheetURL = new URL(urlString);
             // To get the editable spreadsheet, insert the key:
