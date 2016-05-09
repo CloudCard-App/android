@@ -31,7 +31,7 @@
         android:layout_below="@+id/enterCode"
         android:layout_toLeftOf="@+id/submitButton"
         android:layout_toStartOf="@+id/submitButton"
-        android:text="Cancel" />
+        android:text="@string/cancel" />
 
     <TextView
         android:id="@+id/titleText"

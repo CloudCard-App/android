@@ -10,5 +10,13 @@
     <string name="incorrectCode">Incorrect code</string>
     <string name="cloudcard">CloudCard</string>
     <string name="swipeToStart">Swipe left to start!</string>
+    <string name="find_new_deck">Find new deck</string>
+    <string name="your_decks">Your decks</string>
+    <string name="slideshow">Slideshow</string>
+    <string name="tools">Tools</string>
+    <string name="communicate">Communicate</string>
+    <string name="share">Share</string>
+    <string name="send">Send</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

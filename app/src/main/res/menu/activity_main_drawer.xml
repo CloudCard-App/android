@@ -5,31 +5,31 @@
         <item
             android:id="@+id/nav_deckfinder"
             android:icon="@drawable/ic_menu_search"
-            android:title="Find new deck" />
+            android:title="@string/find_new_deck" />
         <item
             android:id="@+id/nav_yourdecks"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Your decks" />
+            android:title="@string/your_decks" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="@string/slideshow" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="@string/tools" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/communicate">
         <menu>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="@string/share" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="@string/send" />
         </menu>
     </item>
 

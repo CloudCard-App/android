@@ -244,7 +244,7 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
         } else if (cardDisplay.getText().equals(cardData.get(currentIndex).getBack())) {
             updateCard(true); // Switch to front
         }
-        numDisplay.setText(String.valueOf(currentIndex + 1) + " / " + totalLength);
+        numDisplay.setText(String.valueOf(currentIndex + 1) + " | " + totalLength);
     }
 
     private void nextCard() {

@@ -20,7 +20,6 @@ public abstract class DownloadedDeckParser {
     private Iterator<?> rowIterator = null;
     private String pathToFile = "";
     private Object obj = null;
-    private JSONArray rows = null;
 
     public DownloadedDeckParser(String pathToFile) {
         this.pathToFile = pathToFile;
@@ -57,7 +56,7 @@ public abstract class DownloadedDeckParser {
         JSONObject jsonObject = (JSONObject) obj;
         JSONObject table = (JSONObject) jsonObject.get(JSONOBJECT_TABLE_KEY);
 
-        rows = (JSONArray) table.get(JSONOBJECT_ROW_KEY);
+        JSONArray rows = (JSONArray) table.get(JSONOBJECT_ROW_KEY);
         rowIterator = rows.iterator();
     }
 
