@@ -12,10 +12,6 @@
 
         <!-- Color of the sliders, text fields, and other accents -->
         <item name="colorAccent">@color/colorAccent</item>
-
-        <!-- Like the color of the header in the drawer -->
-        <item name="android:textColor">@color/textWhite</item>
-
     </style>
 
     <style name="AppTheme.NoActionBar">
