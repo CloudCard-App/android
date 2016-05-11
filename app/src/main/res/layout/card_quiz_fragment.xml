@@ -3,26 +3,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/cardBackground"
-        android:layout_width="match_parent"
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
-        android:layout_below="@+id/currentNumDisplay"
-        android:layout_centerHorizontal="true"
-        android:layout_centerInParent="true"
-        android:fadingEdge="horizontal"
-        android:src="@mipmap/blue_card" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="52dp"
+        android:weightSum="5"></TableLayout>
 
-    <TextView
-        android:id="@+id/cardDisplay"
+    <TableRow
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:text=""
-        android:textSize="28sp"
-        android:typeface="sans" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/tableLayout"
+        android:layout_toRightOf="@+id/tableLayout"
+        android:weightSum="5">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="25dp"
+            android:layout_weight="5"
+            android:clickable="true"
+            android:src="@mipmap/navigation_back" />
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="5"></TableLayout>
+
+        <ImageButton
+            android:id="@+id/nextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="5"
+            android:clickable="true"
+            android:src="@mipmap/navigation_next" />
+
+        <TextView
+            android:id="@+id/cardDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </TableRow>
 
     <TableRow
         android:id="@+id/progress"
@@ -45,28 +79,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-
     </TableRow>
-
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="25dp"
-        android:clickable="true"
-        android:src="@mipmap/navigation_back" />
-
-    <ImageButton
-        android:id="@+id/nextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="25dp"
-        android:clickable="true"
-        android:src="@mipmap/navigation_next" />
-
 
 </RelativeLayout>

@@ -9,7 +9,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -33,7 +32,6 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
     private static final String TAG = "CardQuizFragment";
     private TextView cardDisplay;
     private TextView numDisplay;
-    private ImageView cardBackground;
     private SeekBar progressSelect;
     private ImageButton backButton;
     private ImageButton nextButton;
@@ -141,7 +139,6 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
         // getView() gets the default view for the fragment.
         cardDisplay = (TextView) getView().findViewById(R.id.cardDisplay);
         numDisplay = (TextView) getView().findViewById(R.id.currentNumDisplay);
-        cardBackground = (ImageView) getView().findViewById(R.id.cardBackground);
 
         progressSelect = (SeekBar) getView().findViewById(R.id.progressSelect);
 
@@ -245,7 +242,7 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
         } else if (cardDisplay.getText().equals(cardData.get(currentIndex).getBack())) {
             updateCard(true); // Switch to front
         }
-        numDisplay.setText(String.valueOf(currentIndex + 1) + " | " + totalLength);
+        numDisplay.setText(MessageFormat.format("{0} | {1}", String.valueOf(currentIndex + 1), totalLength));
     }
 
     private void nextCard() {
@@ -260,12 +257,10 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
         List<Card> cardData = deckWithContents.getCards();
         if (front) {
             cardDisplay.setText(cardData.get(currentIndex).getFront());
-            cardBackground.setImageResource(R.mipmap.blue_card);
         } else {
             cardDisplay.setText(cardData.get(currentIndex).getBack());
-            cardBackground.setImageResource(R.mipmap.yellow_card);
         }
-        numDisplay.setText(MessageFormat.format("{0} / {1}", String.valueOf(currentIndex + 1), totalLength));
+        numDisplay.setText(MessageFormat.format("{0} | {1}", String.valueOf(currentIndex + 1), totalLength));
         progressSelect.setProgress(currentIndex); // Wee-Wee!
     }
 
