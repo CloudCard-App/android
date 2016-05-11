@@ -3,6 +3,7 @@ package com.example.marc.materialtabviews.deck_chooser;
 import android.app.FragmentManager;
 import android.app.ListFragment;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -114,33 +115,41 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
      *
      * @param data The result of the method that calls onTaskCompleted
      */
-    public void onTaskCompleted(List<Object> data) {
-        deckList.clear();
-        deckNameList.clear();
+    public void onTaskCompleted(Boolean err, List<Object> data) {
+        if (data.size() > 0) {
+            deckList.clear();
+            deckNameList.clear();
 
-        // Populate the schoolNameList array with names of the decks.
-        // We still will need the schoolList itself for the lookup
-        // of names and keys inside onListItemClick.
-        for (Object each : data) {
-            deckList.add((Deck) each);
-        }
+            // Populate the schoolNameList array with names of the decks.
+            // We still will need the schoolList itself for the lookup
+            // of names and keys inside onListItemClick.
+            for (Object each : data) {
+                deckList.add((Deck) each);
+            }
 
-        // Because we like our users.
-        Collections.sort(deckList);
+            // Because we like our users.
+            Collections.sort(deckList);
 
-        // Now, both the deckList and deckNameList will be sorted.
-        for (Deck each : deckList) {
-            deckNameList.add(each.getName());
-        }
+            // Now, both the deckList and deckNameList will be sorted.
+            for (Deck each : deckList) {
+                deckNameList.add(each.getName());
+            }
 
-        // Create a new adapter with schoolNameList.
-        // TODO Maybe look into casting into a BaseAdapter, and then calling something like
-        // TODO notifyDataSetChanged().
-        try {
-            setListAdapter();
-        } catch (NullPointerException npe) {
-            Log.w(TAG, "No data received from deckdownloader.");
-            npe.printStackTrace();
+            // Create a new adapter with schoolNameList.
+            // TODO Maybe look into casting into a BaseAdapter, and then calling something like
+            // TODO notifyDataSetChanged().
+            try {
+                setListAdapter();
+            } catch (NullPointerException npe) {
+                Log.w(TAG, "No data received from deckdownloader.");
+                npe.printStackTrace();
+            }
+        } else {
+            Log.i(TAG, "About to show snackbar");
+            Snackbar snackbar = Snackbar
+                    .make(getView(), "Network error! Yikes!", Snackbar.LENGTH_LONG);
+            snackbar.show();
+            Log.i(TAG, "Showed snackbar!");
         }
     }
 }

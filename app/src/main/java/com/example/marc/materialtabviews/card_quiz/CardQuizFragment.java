@@ -170,23 +170,24 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
             deckWithContents.setCards(cardList);
             List<Object> resultDeckList = new ArrayList<>();
             resultDeckList.add(deckWithContents);
-            this.onTaskCompleted(resultDeckList);
+            this.onTaskCompleted(false, resultDeckList);
         }
     }
 
     public void setData(DeckWithContents data) {
         List<Object> dataList = new ArrayList<>();
         dataList.add(data);
-        onTaskCompleted(dataList);
+        onTaskCompleted(false, dataList);
     }
 
     /**
      * Is called by CardQuizDownloader when it finishes everything.
      *
+     * @param err
      * @param data An ArrayList of Cards, disguised as Object.
      */
     @Override
-    public void onTaskCompleted(List<Object> data) {
+    public void onTaskCompleted(Boolean err, List<Object> data) {
 
         cardDisplay.setText(R.string.swipeToStart);
 

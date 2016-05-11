@@ -38,7 +38,7 @@ public class CardQuizDownloader extends Downloader {
             deckWithContents.setCards(cardList);
             List<Object> resultDeckList = new ArrayList<>();
             resultDeckList.add(deckWithContents);
-            completionWaiter.onTaskCompleted(resultDeckList);
+            completionWaiter.onTaskCompleted(false, resultDeckList);
         } else {
             //TODO: Let the user know to use his cached decks
         }

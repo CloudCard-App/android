@@ -18,7 +18,7 @@ import java.util.List;
 
 public class YourDecksChooserFragment extends ListFragment {
 
-    private final String TAG = "YourDecksChooser";
+    private final String TAG = "YourDecksChooserFr";
     List<String> deckNameList = new ArrayList<>();
 
     public YourDecksChooserFragment() {

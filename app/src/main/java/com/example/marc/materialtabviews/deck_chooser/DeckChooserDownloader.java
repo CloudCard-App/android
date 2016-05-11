@@ -29,7 +29,7 @@ public class DeckChooserDownloader extends Downloader {
                 Deck thisDeck = (Deck) reader.getNext();
                 deckList.add(thisDeck);
             }
-            completionWaiter.onTaskCompleted(deckList);
+            completionWaiter.onTaskCompleted(false, deckList);
         } else {
             //TODO: Tell the user to use his cached decks
         }
