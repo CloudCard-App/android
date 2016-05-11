@@ -2,14 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <TableRow
         android:id="@+id/progress"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_alignParentTop="true"
         android:padding="5dip">
-
         <TextView
             android:id="@+id/currentNumDisplay"
             android:layout_width="wrap_content"
@@ -18,7 +16,6 @@
             android:textAlignment="gravity"
             android:textSize="20sp"
             android:typeface="sans" />
-
         <SeekBar
             android:id="@+id/progressSelect"
             android:layout_width="match_parent"
@@ -29,14 +26,11 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_below="@id/progress"
-        android:layout_gravity="center_vertical"
-        android:layout_weight="5">
-
+        android:layout_gravity="center_vertical">
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:weightSum="5">
-
             <TextView
                 android:id="@+id/cardDisplay"
                 android:layout_width="match_parent"
@@ -49,16 +43,6 @@
     </TableLayout>
 
     <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="bottom"
-        android:clickable="true"
-        android:src="@mipmap/navigation_back" />
-
-    <ImageButton
         android:id="@+id/nextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,4 +52,13 @@
         android:clickable="true"
         android:src="@mipmap/navigation_next" />
 
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="bottom"
+        android:clickable="true"
+        android:src="@mipmap/navigation_back" />
 </RelativeLayout>
