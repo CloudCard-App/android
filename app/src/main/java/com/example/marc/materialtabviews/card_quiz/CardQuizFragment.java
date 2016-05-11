@@ -123,7 +123,6 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
                 return gesture.onTouchEvent(event);
             }
         });
-
         return view;
     }
 
@@ -138,6 +137,7 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
 
         // getView() gets the default view for the fragment.
         cardDisplay = (TextView) getView().findViewById(R.id.cardDisplay);
+        cardDisplay.setTextSize(30);
         numDisplay = (TextView) getView().findViewById(R.id.currentNumDisplay);
 
         progressSelect = (SeekBar) getView().findViewById(R.id.progressSelect);

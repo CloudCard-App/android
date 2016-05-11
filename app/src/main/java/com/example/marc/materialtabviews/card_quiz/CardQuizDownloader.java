@@ -40,7 +40,7 @@ public class CardQuizDownloader extends Downloader {
             resultDeckList.add(deckWithContents);
             completionWaiter.onTaskCompleted(false, resultDeckList);
         } else {
-            //TODO: Let the user know to use his cached decks
+            completionWaiter.onTaskCompleted(true, null);
         }
     }
 
