@@ -30,6 +30,7 @@ import java.util.Map;
 public class CardQuizFragment extends Fragment implements OnTaskCompleted {
 
     private static final String TAG = "CardQuizFragment";
+    private static final String url = "http://104.197.228.156:8080/studentPost/";
     private TextView cardDisplay;
     private TextView numDisplay;
     private SeekBar progressSelect;
@@ -39,6 +40,7 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
     private int totalLength;
     private DeckWithContents deckWithContents = new DeckWithContents();
     private boolean shouldDownload = true;
+
 
     public CardQuizFragment() {
     }
@@ -100,14 +102,11 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
                         try {
                             if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
                                     && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                                Log.i(TAG, "Right to Left");
                                 nextCard();
                             } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
                                     && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                                Log.i(TAG, "Left to Right");
                                 previousCard();
                             } else {
-                                Log.i(TAG, "Tippedy-tapped!");
                                 flipCard();
                             }
                         } catch (Exception e) {
@@ -180,7 +179,7 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
     /**
      * Is called by CardQuizDownloader when it finishes everything.
      *
-     * @param err
+     * @param err True if there was an error generated
      * @param data An ArrayList of Cards, disguised as Object.
      */
     @Override
@@ -281,7 +280,6 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
     }
 
     private void sendPostRequest(final String code, final String action) {
-        String url = "http://104.197.228.156:8080/studentPost/";
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, url, null, null) {
             @Override

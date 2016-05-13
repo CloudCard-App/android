@@ -40,6 +40,7 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
         if (container != null) {
             container.removeAllViews();
         }
+
         // Inflate the card_quiz_fragment inside container
         // This is very important to call.
         return inflater.inflate(R.layout.deck_chooser_fragment, container, false);
@@ -149,6 +150,8 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
             Snackbar snackbar = Snackbar
                     .make(getView(), "Network error! Yikes!", Snackbar.LENGTH_LONG);
             snackbar.show();
+
+
             Log.i(TAG, "Showed snackbar!");
         }
     }
