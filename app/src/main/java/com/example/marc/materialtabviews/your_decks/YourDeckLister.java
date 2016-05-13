@@ -2,6 +2,8 @@ package com.example.marc.materialtabviews.your_decks;
 
 import android.os.Environment;
 
+import com.example.marc.materialtabviews.Downloader;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,7 @@ public class YourDeckLister {
         File[] listOfFiles = folder.listFiles();
         List<String> fileNames = new ArrayList<>();
         for (File each : listOfFiles) {
-            if (each.isFile() && !each.getName().equals("decks.json")) {
+            if (each.isFile() && !each.getName().equals(Downloader.DECK_JSON)) {
                 fileNames.add(each.getName());
             }
         }
