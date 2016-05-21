@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.marc.materialtabviews.Downloader;
@@ -36,6 +37,10 @@ public class YourDecksChooserFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        getListView().setEmptyView(getActivity().findViewById(android.R.id.empty));
+
+        ImageView emptyImage = (ImageView) getView().findViewById(android.R.id.empty);
+        emptyImage.setImageResource(R.drawable.no_saved_decks);
 
         YourDeckLister lister = new YourDeckLister(Downloader.APP_DIRECTORY);
         deckNameList = lister.getListOfSheets();
