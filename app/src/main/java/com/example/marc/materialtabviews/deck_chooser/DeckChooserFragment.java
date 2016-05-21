@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.marc.materialtabviews.Downloader;
@@ -39,7 +40,9 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
         // appear on top of the previous one.
         if (container != null) {
             container.removeAllViews();
+
         }
+
 
         // Inflate the card_quiz_fragment inside container
         // This is very important to call.
@@ -48,7 +51,11 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        getListView().setEmptyView(getActivity().findViewById(android.R.id.empty));
         setListAdapter();
+
+        ImageView emptyImage = (ImageView) getView().findViewById(android.R.id.empty);
+        emptyImage.setImageResource(R.drawable.no_network);
 
         // This is the key to the lookup spreadsheet.
         // It contains deck names and their corresponding keys.
@@ -62,7 +69,6 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
         // And passes the arrayList of Deck as data.
         DeckChooserDownloader downloader = new DeckChooserDownloader(key, fileName, this);
         downloader.execute();
-
     }
 
     protected void setListAdapter() {

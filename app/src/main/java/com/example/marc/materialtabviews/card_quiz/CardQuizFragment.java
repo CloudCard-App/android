@@ -30,7 +30,7 @@ import java.util.Map;
 public class CardQuizFragment extends Fragment implements OnTaskCompleted {
 
     private static final String TAG = "CardQuizFragment";
-    private static final String url = "http://104.197.228.156:8080/studentPost/";
+    private static final String url = "http://10.128.0.4:80/studentPost/";
     private TextView cardDisplay;
     private TextView numDisplay;
     private SeekBar progressSelect;
