@@ -18,5 +18,11 @@
     <string name="share">Share</string>
     <string name="send">Send</string>
     <string name="cancel">Cancel</string>
+    <string name="deckChooserTitle">Available Decks</string>
+    <string name="enterAccessCode">Enter Access Code</string>
+    <string name="yourDecks">Your Decks</string>
+    <string name="messages">Messages</string>
+    <string name="notifications">Notifications</string>
+    <string name="settings">Settings</string>
 
 </resources>

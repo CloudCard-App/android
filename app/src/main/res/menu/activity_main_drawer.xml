@@ -8,28 +8,24 @@
             android:title="@string/find_new_deck" />
         <item
             android:id="@+id/nav_yourdecks"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_menu_yourdecks"
             android:title="@string/your_decks" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/slideshow" />
+            android:id="@+id/nav_messages"
+            android:icon="@drawable/ic_menu_messages"
+            android:title="@string/messages" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="@string/tools" />
+            android:id="@+id/nav_notifications"
+            android:icon="@drawable/ic_menu_notifications"
+            android:title="@string/notifications" />
     </group>
 
-    <item android:title="@string/communicate">
+    <item android:title="">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="@string/send" />
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_menu_settings"
+                android:title="@string/settings" />
         </menu>
     </item>
 
