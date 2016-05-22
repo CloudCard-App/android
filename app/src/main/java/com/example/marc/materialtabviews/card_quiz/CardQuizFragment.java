@@ -30,7 +30,7 @@ import java.util.Map;
 public class CardQuizFragment extends Fragment implements OnTaskCompleted {
 
     private static final String TAG = "CardQuizFragment";
-    private static final String url = "http://10.128.0.4:80/studentPost/";
+    private static final String url = "http://104.197.166.40:80/studentPost/";
     private TextView cardDisplay;
     private TextView numDisplay;
     private SeekBar progressSelect;
@@ -238,8 +238,10 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
         List<Card> cardData = deckWithContents.getCards();
         if (cardDisplay.getText().equals(cardData.get(currentIndex).getFront())) {
             updateCard(false); // Switch to back
+            cardDisplay.setTextColor(getResources().getColor(R.color.lightBlue));
         } else if (cardDisplay.getText().equals(cardData.get(currentIndex).getBack())) {
             updateCard(true); // Switch to front
+            cardDisplay.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         }
         numDisplay.setText(MessageFormat.format("{0} | {1}", String.valueOf(currentIndex + 1), totalLength));
     }
