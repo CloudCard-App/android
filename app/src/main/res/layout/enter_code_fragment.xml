@@ -15,6 +15,27 @@
         android:hint="Code"
         android:inputType="text" />
 
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/codeCorrectness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/titleText"
+        android:layout_centerHorizontal="true"
+        android:enabled="false"
+        android:text="ABC"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
     <Button
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
@@ -32,23 +53,5 @@
         android:layout_toLeftOf="@+id/submitButton"
         android:layout_toStartOf="@+id/submitButton"
         android:text="@string/cancel" />
-
-    <TextView
-        android:id="@+id/titleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text=""
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/codeCorrectness"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/titleText"
-        android:layout_centerHorizontal="true"
-        android:text=""
-        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>

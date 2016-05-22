@@ -21,7 +21,6 @@ public class EnterCodeFragment extends IntermediateFragment {
     private String title;
     // The place where correct/incorrect is shown
     // TODO: Make sure this is working!
-    private TextView codeCorrectness;
     // The place where the user can type in the code
     private EditText codeForm;
 
@@ -32,7 +31,6 @@ public class EnterCodeFragment extends IntermediateFragment {
         super(null, null);
         correctCode = "";
         title = "";
-        codeCorrectness = null;
         codeForm = null;
     }
 
@@ -55,7 +53,6 @@ public class EnterCodeFragment extends IntermediateFragment {
         Button backButton = (Button) getView().findViewById(R.id.cancelButton);
         Button submitButton = (Button) getView().findViewById(R.id.submitButton);
         codeForm = (EditText) getView().findViewById(R.id.enterCode);
-        codeCorrectness = (TextView) getView().findViewById(R.id.codeCorrectness);
         TextView titleDisplay = (TextView) getView().findViewById(R.id.titleText);
 
         titleDisplay.setText(title);
@@ -75,11 +72,11 @@ public class EnterCodeFragment extends IntermediateFragment {
             public void onClick(View v) {
                 String codeText = codeForm.getText().toString();
                 if (codeText.equals(correctCode)) {
-                    codeCorrectness.setText(R.string.correctCode);
+                    codeForm.setText(R.string.correctCode);
                     toggleKeyboard(); // Close upon exiting
                     gotoNext();
                 } else {
-                    codeCorrectness.setText(R.string.incorrectCode);
+                    codeForm.setText(R.string.incorrectCode);
                 }
             }
         });
