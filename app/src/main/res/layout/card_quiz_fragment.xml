@@ -2,12 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <TableRow
         android:id="@+id/progress"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:padding="5dip">
+        android:padding="5dip"
+        android:weightSum="1">
+
         <TextView
             android:id="@+id/currentNumDisplay"
             android:layout_width="wrap_content"
@@ -16,6 +19,7 @@
             android:textAlignment="gravity"
             android:textSize="20sp"
             android:typeface="sans" />
+
         <SeekBar
             android:id="@+id/progressSelect"
             android:layout_width="match_parent"
@@ -23,42 +27,63 @@
     </TableRow>
 
     <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_below="@id/progress"
-        android:layout_gravity="center_vertical">
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical">
+
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:weightSum="5">
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
             <TextView
                 android:id="@+id/cardDisplay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="5"
+                android:layout_weight="1"
                 android:background="@drawable/card_cell"
-                android:text="Large Text"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:text="Swipe up to flip, Left for next, Right for previous."
+                android:textAlignment="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/colorPrimaryDark" />
         </TableRow>
     </TableLayout>
 
-    <ImageButton
-        android:id="@+id/nextButton"
+    <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="bottom"
-        android:clickable="true"
-        android:src="@mipmap/navigation_next" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp">
 
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_gravity="bottom"
-        android:clickable="true"
-        android:src="@mipmap/navigation_back" />
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:src="@drawable/ic_arrow_back_lightblue_24dp" />
+
+        <Space
+            android:layout_width="100dp"
+            android:layout_height="match_parent" />
+
+        <ImageButton
+            android:id="@+id/nextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:src="@drawable/ic_arrow_forward_lightblue_24dp" />
+
+    </TableRow>
 </RelativeLayout>
