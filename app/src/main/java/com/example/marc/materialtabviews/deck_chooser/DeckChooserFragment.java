@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.marc.materialtabviews.Downloader;
+import com.example.marc.materialtabviews.MainActivity;
 import com.example.marc.materialtabviews.OnTaskCompleted;
 import com.example.marc.materialtabviews.R;
 import com.example.marc.materialtabviews.card_quiz.CardQuizFragment;
@@ -40,9 +41,9 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
         // appear on top of the previous one.
         if (container != null) {
             container.removeAllViews();
-
         }
 
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.deckChooserTitle));
 
         // Inflate the card_quiz_fragment inside container
         // This is very important to call.

@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.marc.materialtabviews.Downloader;
+import com.example.marc.materialtabviews.MainActivity;
 import com.example.marc.materialtabviews.R;
 import com.example.marc.materialtabviews.card_quiz.CardQuizFragment;
 
@@ -31,6 +32,9 @@ public class YourDecksChooserFragment extends ListFragment {
         if (container != null) {
             container.removeAllViews();
         }
+
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.yourDecks));
+
         return inflater.inflate(R.layout.deck_chooser_fragment, container, false);
     }
 

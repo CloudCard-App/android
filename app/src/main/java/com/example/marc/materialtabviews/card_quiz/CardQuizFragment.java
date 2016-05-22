@@ -16,6 +16,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.marc.materialtabviews.Downloader;
+import com.example.marc.materialtabviews.MainActivity;
 import com.example.marc.materialtabviews.OnTaskCompleted;
 import com.example.marc.materialtabviews.R;
 import com.example.marc.materialtabviews.model.Card;
@@ -77,6 +78,8 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
         if (container != null) {
             container.removeAllViews();
         }
+
+        ((MainActivity) getActivity()).setActionBarTitle(deckWithContents.getName());
 
         reportEnterStudy(deckWithContents.getCode());
 
@@ -179,7 +182,7 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
     /**
      * Is called by CardQuizDownloader when it finishes everything.
      *
-     * @param err True if there was an error generated
+     * @param err  True if there was an error generated
      * @param data An ArrayList of Cards, disguised as Object.
      */
     @Override

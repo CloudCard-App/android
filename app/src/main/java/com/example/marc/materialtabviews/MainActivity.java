@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import com.example.marc.materialtabviews.deck_chooser.DeckChooserFragment;
 import com.example.marc.materialtabviews.misc_fragments.DefaultFragment;
+import com.example.marc.materialtabviews.notifications.ComingSoon;
 import com.example.marc.materialtabviews.your_decks.YourDecksChooserFragment;
 import com.instabug.library.Instabug;
 import com.instabug.wrapper.support.activity.InstabugAppCompatActivity;
@@ -64,6 +65,10 @@ public class MainActivity extends InstabugAppCompatActivity
         }
     }
 
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -101,14 +106,12 @@ public class MainActivity extends InstabugAppCompatActivity
             fragment = new DeckChooserFragment();
         } else if (id == R.id.nav_yourdecks) {
             fragment = new YourDecksChooserFragment();
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_messages) {
+            fragment = new ComingSoon();
+        } else if (id == R.id.nav_notifications) {
+            fragment = new ComingSoon();
+        } else if (id == R.id.nav_settings) {
+            fragment = new ComingSoon();
         }
 
         fragmentManager.beginTransaction()

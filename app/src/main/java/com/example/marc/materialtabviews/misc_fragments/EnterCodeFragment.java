@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.marc.materialtabviews.MainActivity;
 import com.example.marc.materialtabviews.R;
 
 public class EnterCodeFragment extends IntermediateFragment {
@@ -45,6 +46,9 @@ public class EnterCodeFragment extends IntermediateFragment {
         if (container != null) {
             container.removeAllViews();
         }
+
+        ((MainActivity) getActivity()).setActionBarTitle(getString(R.string.enterAccessCode));
+
         return inflater.inflate(R.layout.enter_code_fragment, container, false);
     }
 
