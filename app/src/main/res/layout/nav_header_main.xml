@@ -13,10 +13,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing" />
-    <!--android:src="" -->
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:src="@drawable/ic_cloudcardtext" />
 
     <TextView
         android:layout_width="match_parent"
@@ -29,6 +29,6 @@
         android:id="@+id/cardDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="" />
+        android:text="@string/mvhs_name" />
 
 </LinearLayout>
