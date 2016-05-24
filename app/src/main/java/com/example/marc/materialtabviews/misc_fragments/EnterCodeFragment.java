@@ -1,6 +1,5 @@
 package com.example.marc.materialtabviews.misc_fragments;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,9 +34,11 @@ public class EnterCodeFragment extends IntermediateFragment {
         codeForm = null;
     }
 
-    public EnterCodeFragment(Fragment previous, Fragment next, String correctCode, String title) {
-        super(previous, next);
+    public void setCorrectCode(String correctCode) {
         this.correctCode = correctCode;
+    }
+
+    public void setTitle(String title) {
         this.title = title;
     }
 

@@ -100,10 +100,12 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
         cardQuiz.setCode(selection.getCode());
 
         // Here, ask for the code
-        EnterCodeFragment codeAuth = new EnterCodeFragment(this,
-                cardQuiz,
-                correctCode,
-                selection.getName());
+        EnterCodeFragment codeAuth = new EnterCodeFragment();
+
+        codeAuth.setPrevious(this);
+        codeAuth.setNext(cardQuiz);
+        codeAuth.setCorrectCode(correctCode);
+        codeAuth.setTitle(selection.getName());
 
         // We can get a fragment manager from the Fragment superclass
         FragmentManager fragmentManager = getFragmentManager();
