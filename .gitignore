@@ -1,6 +1,10 @@
 *.iml
 .gradle
 /local.properties
-/.idea/
+.idea/
 .DS_Store
 /build
+app-release.apk
+src/main/java/com/example/marc/materialtabviews/messages/
+src/main/java/com/example/marc/materialtabviews/settings/
+src/main/res/mipmap-xxxhdpi/ic_search.png/
