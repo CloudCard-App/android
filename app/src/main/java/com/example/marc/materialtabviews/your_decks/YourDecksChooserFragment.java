@@ -14,6 +14,8 @@ import com.example.marc.materialtabviews.Downloader;
 import com.example.marc.materialtabviews.MainActivity;
 import com.example.marc.materialtabviews.R;
 import com.example.marc.materialtabviews.card_quiz.CardQuizFragment;
+import com.example.marc.materialtabviews.deck_operations.DownloadedDeckChooserReader;
+import com.example.marc.materialtabviews.model.Deck;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,8 +59,19 @@ public class YourDecksChooserFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         CardQuizFragment cardQuiz = new CardQuizFragment();
-        cardQuiz.setName(deckNameList.get((int) id));
+        String fileName = deckNameList.get((int) id);
+        cardQuiz.setName(fileName);
         cardQuiz.setShouldDownload(false);
+
+        //CODE!!!
+        DownloadedDeckChooserReader deckChooserReader =
+                new DownloadedDeckChooserReader(Downloader.APP_DIRECTORY + Downloader.DECK_JSON);
+        while (deckChooserReader.hasNext()) {
+            Deck thisDeck = (Deck) deckChooserReader.getNext();
+            if (thisDeck.getName().equals(deckNameList.get((int) id))) {
+                cardQuiz.setCode(thisDeck.getCode());
+            }
+        }
 
         // We can get a fragment manager from the Fragment superclass
         FragmentManager fragmentManager = getFragmentManager();
