@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -34,9 +35,11 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
     private static final String url = "http://104.197.166.40:80/studentPost/";
     private TextView cardDisplay;
     private TextView numDisplay;
+    private TextView cardSideView;
     private SeekBar progressSelect;
     private ImageButton backButton;
     private ImageButton nextButton;
+    private Button flipButton;
     private int currentIndex = -1; // It doesn't have any index yet, before it starts.
     private int totalLength;
     private DeckWithContents deckWithContents = new DeckWithContents();
@@ -105,11 +108,14 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
                         try {
                             if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
                                     && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                                Log.v(TAG, "Next card!");
                                 nextCard();
                             } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
                                     && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                                Log.v(TAG, "Previous card!");
                                 previousCard();
                             } else {
+                                Log.v(TAG, "Flipping card!");
                                 flipCard();
                             }
                         } catch (Exception e) {
@@ -146,6 +152,9 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
 
         nextButton = (ImageButton) getView().findViewById(R.id.nextButton);
         backButton = (ImageButton) getView().findViewById(R.id.backButton);
+        flipButton = (Button) getView().findViewById(R.id.flipButton);
+
+        cardSideView = (TextView) getView().findViewById(R.id.cardSide);
 
         if (shouldDownload) {
             // Create the downloader, passing in this as the OnTaskCompleted listener
@@ -228,6 +237,13 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
                 previousCard();
             }
         });
+
+        flipButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flipCard();
+            }
+        });
     }
 
     private void previousCard() {
@@ -239,10 +255,10 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
 
     private void flipCard() {
         List<Card> cardData = deckWithContents.getCards();
-        if (cardDisplay.getText().equals(cardData.get(currentIndex).getFront())) {
+        if (cardDisplay.getText().toString().equals(cardData.get(currentIndex).getFront())) {
             updateCard(false); // Switch to back
             cardDisplay.setTextColor(getResources().getColor(R.color.lightBlue));
-        } else if (cardDisplay.getText().equals(cardData.get(currentIndex).getBack())) {
+        } else if (cardDisplay.getText().toString().equals(cardData.get(currentIndex).getBack())) {
             updateCard(true); // Switch to front
             cardDisplay.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
         }
@@ -261,8 +277,10 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
         List<Card> cardData = deckWithContents.getCards();
         if (front) {
             cardDisplay.setText(cardData.get(currentIndex).getFront());
+            cardSideView.setText(R.string.card_front);
         } else {
             cardDisplay.setText(cardData.get(currentIndex).getBack());
+            cardSideView.setText(R.string.card_back);
         }
         numDisplay.setText(MessageFormat.format("{0} | {1}", String.valueOf(currentIndex + 1), totalLength));
         progressSelect.setProgress(currentIndex); // Wee-Wee!

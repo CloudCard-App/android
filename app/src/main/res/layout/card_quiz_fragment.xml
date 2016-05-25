@@ -68,9 +68,11 @@
             android:clickable="true"
             android:src="@drawable/ic_arrow_back_lightblue_24dp" />
 
-        <Space
-            android:layout_width="100dp"
-            android:layout_height="match_parent" />
+        <Button
+            android:id="@+id/flipButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/flip_card" />
 
         <ImageButton
             android:id="@+id/nextButton"
@@ -84,4 +86,14 @@
             android:src="@drawable/ic_arrow_forward_lightblue_24dp" />
 
     </TableRow>
+
+    <TextView
+        android:id="@+id/cardSide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"
+        android:text="Side of Card" />
+
 </RelativeLayout>
