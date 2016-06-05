@@ -2,6 +2,7 @@ package com.example.marc.materialtabviews;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -9,18 +10,22 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.marc.materialtabviews.deck_chooser.DeckChooserFragment;
 import com.example.marc.materialtabviews.misc_fragments.DefaultFragment;
 import com.example.marc.materialtabviews.notifications.ComingSoon;
+import com.example.marc.materialtabviews.signin.SignInManager;
 import com.example.marc.materialtabviews.your_decks.YourDecksChooserFragment;
 import com.instabug.library.Instabug;
 import com.instabug.wrapper.support.activity.InstabugAppCompatActivity;
 
 public class MainActivity extends InstabugAppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,35 +96,49 @@ public class MainActivity extends InstabugAppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        Log.i(TAG, "Navigation Item Selected!");
+        if (SignInManager.getManager().isUserSignedIn()) {
+            Log.i(TAG, "User signed in already");
+            // Handle navigation view item clicks here.
+            int id = item.getItemId();
 
-        // For AppCompat use getSupportFragmentManager
-        Fragment fragment = new DefaultFragment();
-        FragmentManager fragmentManager = getFragmentManager();
+            // For AppCompat use getSupportFragmentManager
+            Fragment fragment = new DefaultFragment();
+            FragmentManager fragmentManager = getFragmentManager();
 
-        // TODO: Clean up UI and this
-        if (id == R.id.nav_deckfinder) {
-            fragment = new DeckChooserFragment();
-        } else if (id == R.id.nav_yourdecks) {
-            fragment = new YourDecksChooserFragment();
-        } else if (id == R.id.nav_messages) {
-            fragment = new ComingSoon();
-        } else if (id == R.id.nav_notifications) {
-            fragment = new ComingSoon();
-        } else if (id == R.id.nav_settings) {
-            fragment = new ComingSoon();
+            if (id == R.id.nav_deckfinder) {
+                fragment = new DeckChooserFragment();
+            } else if (id == R.id.nav_yourdecks) {
+                fragment = new YourDecksChooserFragment();
+            } else if (id == R.id.nav_messages) {
+                fragment = new ComingSoon();
+            } else if (id == R.id.nav_notifications) {
+                fragment = new ComingSoon();
+            } else if (id == R.id.nav_settings) {
+                fragment = new ComingSoon();
+            }
+
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, fragment)
+                    .commit();
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            Log.i(TAG, "Asking for sign in");
+
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+
+            Intent signInIntent = new Intent(getBaseContext(),
+                    com.example.marc.materialtabviews.signin.SigninFragment.class);
+            startActivity(signInIntent);
+//            finish();
         }
 
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .commit();
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+        return true; // Why?
     }
 }

@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+
 
 android {
     compileSdkVersion 23
@@ -37,4 +39,6 @@ dependencies {
     compile 'com.instabug.library:instabugsupport:1+' //Woot!instabug
     compile group: 'org.apache.httpcomponents', name: 'httpclient-android', version: '4.3.5'
     compile 'org.apache.httpcomponents:httpclient:4.5.1'
+    compile 'com.google.android.gms:play-services-auth:8.3.0'
+
 }
