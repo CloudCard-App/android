@@ -42,15 +42,15 @@ public class SignInManager {
     }
 
     public String getUserName() {
-        return userAccount.getDisplayName();
+        return (isUserSignedIn()) ? userAccount.getDisplayName() : "";
     }
 
     public String getUserEmail() {
-        return userAccount.getEmail();
+        return (isUserSignedIn()) ? userAccount.getEmail() : "";
     }
 
     public Uri getUserPhotoURI() {
-        return userAccount.getPhotoUrl();
+        return (isUserSignedIn()) ? userAccount.getPhotoUrl() : new Uri.Builder().build();
     }
 
     public boolean isUserSignedIn() {

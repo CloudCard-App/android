@@ -12,23 +12,24 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="@dimen/nav_header_vertical_spacing" />
-    <!--android:src="@drawable/ic_cloudcard" />-->
+            android:id="@+id/profilePic"
+            android:layout_width="131dp"
+            android:layout_height="131dp"
+            android:paddingTop="@dimen/nav_header_vertical_spacing"
+            android:scaleType="fitCenter" />
 
     <TextView
+            android:id="@+id/studentName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+            android:text="@string/mvhs_name" />
+
+    <TextView
+            android:id="@+id/studentEmail"
+        android:layout_width="match_parent"
+            android:layout_height="match_parent"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="@string/cloudcard"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
-
-    <TextView
-        android:id="@+id/cardDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/mvhs_name" />
 
 </LinearLayout>

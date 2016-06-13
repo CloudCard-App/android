@@ -72,6 +72,6 @@ public abstract class IntermediateFragment extends Fragment {
      */
     private void swapFragment(Fragment newFragment) {
         FragmentManager manager = getFragmentManager();
-        manager.beginTransaction().replace(R.id.container, newFragment).commit();
+        manager.beginTransaction().replace(R.id.navHeaderMain, newFragment).commit();
     }
 }

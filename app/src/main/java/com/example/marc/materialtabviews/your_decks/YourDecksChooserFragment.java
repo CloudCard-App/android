@@ -79,7 +79,7 @@ public class YourDecksChooserFragment extends ListFragment {
         // We do the transaction, replacing the container with
         // the code fragment and then committing.
         fragmentManager.beginTransaction()
-                .replace(R.id.container, cardQuiz)
+                .replace(R.id.navHeaderMain, cardQuiz)
                 .commit();
     }
 }

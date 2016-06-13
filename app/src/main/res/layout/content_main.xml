@@ -13,13 +13,12 @@
     tools:showIn="@layout/app_bar_main">
 
     <fragment
-        android:id="@+id/container"
+            android:id="@+id/navHeaderMain"
         class="com.example.marc.materialtabviews.misc_fragments.DefaultFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true" />
-    <!--android:name="com.example.marc.materialtabviews.DeckChooserFragmentent"-->
 
 
 </RelativeLayout>

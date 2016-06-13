@@ -144,7 +144,7 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
         super.onViewCreated(view, savedInstanceState);
 
         // getView() gets the default view for the fragment.
-        cardDisplay = (TextView) getView().findViewById(R.id.cardDisplay);
+        cardDisplay = (TextView) getView().findViewById(R.id.studentEmail);
         cardDisplay.setTextSize(30);
         numDisplay = (TextView) getView().findViewById(R.id.currentNumDisplay);
 

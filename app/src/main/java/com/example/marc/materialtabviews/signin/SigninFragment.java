@@ -88,6 +88,7 @@ public class SigninFragment extends FragmentActivity implements
                 public void onResult(GoogleSignInResult googleSignInResult) {
                     hideProgressDialog();
                     handleSignInResult(googleSignInResult);
+//                    finish();
                 }
             });
         }
@@ -111,12 +112,14 @@ public class SigninFragment extends FragmentActivity implements
             GoogleSignInAccount acct = result.getSignInAccount();
             mStatusTextView.setText("Signed in!");
             SignInManager.getManager().setSignedIn(true);
+            SignInManager.getManager().setUserAccount(acct);
             updateUI();
         } else {
             // Signed out, show unauthenticated UI.
             SignInManager.getManager().setSignedIn(false);
             updateUI();
         }
+        finish();
     }
 
     private void signIn() {
@@ -168,11 +171,24 @@ public class SigninFragment extends FragmentActivity implements
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        hideProgressDialog();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        hideProgressDialog();
+    }
+
     private void updateUI() {
         boolean signedIn = SignInManager.getManager().isUserSignedIn();
         if (signedIn) {
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-            finish();
+//            hideProgressDialog();
+//            finish();
         } else {
             mStatusTextView.setText("Signed out");
         }

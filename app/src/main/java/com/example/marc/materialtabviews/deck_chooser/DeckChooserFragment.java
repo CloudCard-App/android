@@ -113,7 +113,7 @@ public class DeckChooserFragment extends ListFragment implements OnTaskCompleted
         // We do the transaction, replacing the container with
         // the code fragment and then committing.
         fragmentManager.beginTransaction()
-                .replace(R.id.container, codeAuth)
+                .replace(R.id.navHeaderMain, codeAuth)
                 .commit();
     }
 

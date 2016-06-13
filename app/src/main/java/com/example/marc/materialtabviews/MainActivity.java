@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.marc.materialtabviews.deck_chooser.DeckChooserFragment;
 import com.example.marc.materialtabviews.misc_fragments.DefaultFragment;
@@ -23,7 +27,7 @@ import com.instabug.library.Instabug;
 import com.instabug.wrapper.support.activity.InstabugAppCompatActivity;
 
 public class MainActivity extends InstabugAppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, DrawerLayout.DrawerListener {
 
     private static final String TAG = "MainActivity";
 
@@ -47,14 +51,61 @@ public class MainActivity extends InstabugAppCompatActivity
         setSupportActionBar(toolbar);
 
         // Navigation drawer setup.
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this,
+                drawer,
+                toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close) {
+            @Override
+            public void onDrawerOpened(View drawerView) {
+//                super.onDrawerOpened(drawerView);
+
+                //Do stuff
+
+                Log.v(TAG, "OnDrawerOpened!");
+
+                if (!SignInManager.getManager().isUserSignedIn()) {
+                    Log.i(TAG, "Asking for sign in");
+                    drawer.closeDrawer(GravityCompat.START);
+
+                    Intent signInIntent = new Intent(getBaseContext(),
+                            com.example.marc.materialtabviews.signin.SigninFragment.class);
+                    startActivity(signInIntent);
+                }
+            }
+        };
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void setUserInfo() {
+//        if (SignInManager.getManager().isUserSignedIn()) {
+
+//        // Notice how these 4 lines all amazingly line up perfectly at 86 characters!
+//        CoordinatorLayout appBarMain = (CoordinatorLayout) findViewById(R.id.appBar);
+//        RelativeLayout contentMain = (RelativeLayout) findViewById(R.id.contentMain);
+//        LinearLayout navHeaderMain = (LinearLayout) findViewById(R.id.navHeaderMain);
+
+        ImageView profileImage = (ImageView) findViewById(R.id.profilePic);
+        Uri userPhotoURI = SignInManager.getManager().getUserPhotoURI();
+        Log.i(TAG, "User photo URI = " + userPhotoURI);
+        profileImage.setImageURI(userPhotoURI);
+
+        TextView studentName = (TextView) findViewById(R.id.studentName);
+        String userName = SignInManager.getManager().getUserName();
+        Log.i(TAG, "User name = " + userName);
+        studentName.setText(userName);
+
+        TextView studentEmail = (TextView) findViewById(R.id.studentEmail);
+        String userEmail = SignInManager.getManager().getUserEmail();
+        Log.i(TAG, "User email = " + userEmail);
+        studentEmail.setText(userEmail);
+//        }
     }
 
     @Override
@@ -121,24 +172,36 @@ public class MainActivity extends InstabugAppCompatActivity
             }
 
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, fragment)
+                    .replace(R.id.navHeaderMain, fragment)
                     .commit();
 
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            Log.i(TAG, "Asking for sign in");
 
-
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-
-            Intent signInIntent = new Intent(getBaseContext(),
-                    com.example.marc.materialtabviews.signin.SigninFragment.class);
-            startActivity(signInIntent);
-//            finish();
         }
+        setUserInfo();
 
         return true; // Why?
+    }
+
+    @Override
+    public void onDrawerSlide(View drawerView, float slideOffset) {
+
+    }
+
+    @Override
+    public void onDrawerOpened(View drawerView) {
+
+    }
+
+    @Override
+    public void onDrawerClosed(View drawerView) {
+
+    }
+
+    @Override
+    public void onDrawerStateChanged(int newState) {
+
     }
 }
