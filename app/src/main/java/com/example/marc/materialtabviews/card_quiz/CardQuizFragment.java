@@ -190,7 +190,6 @@ public class CardQuizFragment extends Fragment implements OnTaskCompleted {
 
     /**
      * Is called by CardQuizDownloader when it finishes everything.
-     *
      * @param err  True if there was an error generated
      * @param data An ArrayList of Cards, disguised as Object.
      */

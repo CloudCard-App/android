@@ -3,6 +3,7 @@ package com.example.marc.materialtabviews;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,15 +22,17 @@ import android.widget.TextView;
 import com.example.marc.materialtabviews.deck_chooser.DeckChooserFragment;
 import com.example.marc.materialtabviews.misc_fragments.DefaultFragment;
 import com.example.marc.materialtabviews.notifications.ComingSoon;
-import com.example.marc.materialtabviews.signin.SignInManager;
+import com.example.marc.materialtabviews.signin.User;
 import com.example.marc.materialtabviews.your_decks.YourDecksChooserFragment;
 import com.instabug.library.Instabug;
 import com.instabug.wrapper.support.activity.InstabugAppCompatActivity;
 
 public class MainActivity extends InstabugAppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, DrawerLayout.DrawerListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        DrawerLayout.DrawerListener {
 
     private static final String TAG = "MainActivity";
+    private NavigationView navHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,57 +63,52 @@ public class MainActivity extends InstabugAppCompatActivity
                 R.string.navigation_drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
-//                super.onDrawerOpened(drawerView);
 
-                //Do stuff
-
-                Log.v(TAG, "OnDrawerOpened!");
-
-                if (!SignInManager.getManager().isUserSignedIn()) {
-                    Log.i(TAG, "Asking for sign in");
-                    drawer.closeDrawer(GravityCompat.START);
-
-                    Intent signInIntent = new Intent(getBaseContext(),
-                            com.example.marc.materialtabviews.signin.SigninFragment.class);
-                    startActivity(signInIntent);
-                }
             }
         };
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        SharedPreferences sharedPrefs = getSharedPreferences(User.PREFS_USER, MODE_PRIVATE);
+        if (sharedPrefs.getString(User.USER_GID, null) == null) {
+            Log.v(TAG, "User not signed in: launching sign in activity");
+            Intent signInIntent = new Intent(this, SignInActivity.class);
+            startActivity(signInIntent);
+        }
+
+        sharedPrefs.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+            @Override
+            public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                updateNavHeader();
+            }
+        });
+
+        navHeader = (NavigationView) findViewById(R.id.nav_view);
+        navHeader.setNavigationItemSelectedListener(this);
     }
 
-    private void setUserInfo() {
-//        if (SignInManager.getManager().isUserSignedIn()) {
+    private void updateNavHeader() {
+        SharedPreferences sharedPrefs = getSharedPreferences(User.PREFS_USER, MODE_PRIVATE);
 
-//        // Notice how these 4 lines all amazingly line up perfectly at 86 characters!
-//        CoordinatorLayout appBarMain = (CoordinatorLayout) findViewById(R.id.appBar);
-//        RelativeLayout contentMain = (RelativeLayout) findViewById(R.id.contentMain);
-//        LinearLayout navHeaderMain = (LinearLayout) findViewById(R.id.navHeaderMain);
+        ImageView userImage = (ImageView) findViewById(R.id.userPhoto);
+        TextView userName = (TextView) findViewById(R.id.userName);
+        TextView userEmail = (TextView) findViewById(R.id.userEmail);
 
-        ImageView profileImage = (ImageView) findViewById(R.id.profilePic);
-        Uri userPhotoURI = SignInManager.getManager().getUserPhotoURI();
-        Log.i(TAG, "User photo URI = " + userPhotoURI);
-        profileImage.setImageURI(userPhotoURI);
+        String photoString = sharedPrefs.getString(User.USER_PHOTO, null);
+        String nameString = sharedPrefs.getString(User.USER_NAME, null);
+        String emailString = sharedPrefs.getString(User.USER_EMAIL, null);
 
-        TextView studentName = (TextView) findViewById(R.id.studentName);
-        String userName = SignInManager.getManager().getUserName();
-        Log.i(TAG, "User name = " + userName);
-        studentName.setText(userName);
-
-        TextView studentEmail = (TextView) findViewById(R.id.studentEmail);
-        String userEmail = SignInManager.getManager().getUserEmail();
-        Log.i(TAG, "User email = " + userEmail);
-        studentEmail.setText(userEmail);
-//        }
+        if (photoString != null && nameString != null && emailString != null) {
+            Uri profileImage = Uri.parse(photoString);
+            userImage.setImageURI(profileImage);
+            userName.setText(nameString);
+            userEmail.setText(emailString);
+        }
     }
 
     @Override
     /**
-     * When the back button is pressed
+     * When the back button is pressed close the drawer
      */
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -150,37 +148,30 @@ public class MainActivity extends InstabugAppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         Log.i(TAG, "Navigation Item Selected!");
-        if (SignInManager.getManager().isUserSignedIn()) {
-            Log.i(TAG, "User signed in already");
-            // Handle navigation view item clicks here.
-            int id = item.getItemId();
+        int id = item.getItemId();
 
-            // For AppCompat use getSupportFragmentManager
-            Fragment fragment = new DefaultFragment();
-            FragmentManager fragmentManager = getFragmentManager();
+        // For AppCompat use getSupportFragmentManager
+        Fragment fragment = new DefaultFragment();
+        FragmentManager fragmentManager = getFragmentManager();
 
-            if (id == R.id.nav_deckfinder) {
-                fragment = new DeckChooserFragment();
-            } else if (id == R.id.nav_yourdecks) {
-                fragment = new YourDecksChooserFragment();
-            } else if (id == R.id.nav_messages) {
-                fragment = new ComingSoon();
-            } else if (id == R.id.nav_notifications) {
-                fragment = new ComingSoon();
-            } else if (id == R.id.nav_settings) {
-                fragment = new ComingSoon();
-            }
-
-            fragmentManager.beginTransaction()
-                    .replace(R.id.navHeaderMain, fragment)
-                    .commit();
-
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-
+        if (id == R.id.nav_deckfinder) {
+            fragment = new DeckChooserFragment();
+        } else if (id == R.id.nav_yourdecks) {
+            fragment = new YourDecksChooserFragment();
+        } else if (id == R.id.nav_messages) {
+            fragment = new ComingSoon();
+        } else if (id == R.id.nav_notifications) {
+            fragment = new ComingSoon();
+        } else if (id == R.id.nav_settings) {
+            fragment = new ComingSoon();
         }
-        setUserInfo();
+
+        fragmentManager.beginTransaction()
+                .replace(R.id.navHeaderMain, fragment)
+                .commit();
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
 
         return true; // Why?
     }
