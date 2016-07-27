@@ -17,7 +17,7 @@ android:
     # Additional components
     
 
-    # Specify at least one system image,
+    # Specify at least one system imageView,
     # if you need to run emulator(s) during your tests
     # - sys-img-armeabi-v7a-android-19
     # - sys-img-x86-android-17

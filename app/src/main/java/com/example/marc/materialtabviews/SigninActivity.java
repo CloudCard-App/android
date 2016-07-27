@@ -8,7 +8,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.marc.materialtabviews.signin.User;
 import com.google.android.gms.auth.api.Auth;
@@ -20,20 +19,17 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-import java.util.Map;
-
 public class SignInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "SignInActivity";
-    private GoogleApiClient mGoogleApiClient;
     private static final int RC_SIGN_IN = 9001;
+    private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth fireAuth;
     private FirebaseAuth.AuthStateListener authListener;
 
@@ -145,7 +141,6 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
             }
         });
     }
-
 
 
     @Override

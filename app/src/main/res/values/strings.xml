@@ -8,7 +8,6 @@
     <string name="selectTaskFromDrawer">Welcome to CloudCard.</string>
     <string name="correctCode">Correct code</string>
     <string name="incorrectCode">Incorrect code</string>
-    <string name="cloudcard">CloudCard</string>
     <string name="swipeToStart">Swipe left to start! \n\n Swipe up to flip, Right to go back, Left to go forward</string>
     <string name="find_new_deck">Find new deck</string>
     <string name="your_decks">Your decks</string>

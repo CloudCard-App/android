@@ -5,6 +5,8 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -22,10 +24,15 @@ import android.widget.TextView;
 import com.example.marc.materialtabviews.deck_chooser.DeckChooserFragment;
 import com.example.marc.materialtabviews.misc_fragments.DefaultFragment;
 import com.example.marc.materialtabviews.notifications.ComingSoon;
+import com.example.marc.materialtabviews.signin.DownloadImageTask;
 import com.example.marc.materialtabviews.signin.User;
 import com.example.marc.materialtabviews.your_decks.YourDecksChooserFragment;
 import com.instabug.library.Instabug;
 import com.instabug.wrapper.support.activity.InstabugAppCompatActivity;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class MainActivity extends InstabugAppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
@@ -63,7 +70,8 @@ public class MainActivity extends InstabugAppCompatActivity
                 R.string.navigation_drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
-
+                // Refresh the user name, email, and picture every time the drawer is opened
+                updateNavHeader();
             }
         };
         drawer.setDrawerListener(toggle);
@@ -76,9 +84,11 @@ public class MainActivity extends InstabugAppCompatActivity
             startActivity(signInIntent);
         }
 
-        sharedPrefs.registerOnSharedPreferenceChangeListener(new SharedPreferences.OnSharedPreferenceChangeListener() {
+        sharedPrefs.registerOnSharedPreferenceChangeListener(new SharedPreferences.
+                OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+                Log.v(TAG, "Shared Preference changed -> Updating nav header!");
                 updateNavHeader();
             }
         });
@@ -87,6 +97,9 @@ public class MainActivity extends InstabugAppCompatActivity
         navHeader.setNavigationItemSelectedListener(this);
     }
 
+    /**
+     * Updates the user profile picture, name, and email that appears in the drawer.
+     */
     private void updateNavHeader() {
         SharedPreferences sharedPrefs = getSharedPreferences(User.PREFS_USER, MODE_PRIVATE);
 
@@ -95,12 +108,25 @@ public class MainActivity extends InstabugAppCompatActivity
         TextView userEmail = (TextView) findViewById(R.id.userEmail);
 
         String photoString = sharedPrefs.getString(User.USER_PHOTO, null);
+        Log.v(TAG, "User photo string = " + photoString);
         String nameString = sharedPrefs.getString(User.USER_NAME, null);
         String emailString = sharedPrefs.getString(User.USER_EMAIL, null);
 
         if (photoString != null && nameString != null && emailString != null) {
-            Uri profileImage = Uri.parse(photoString);
-            userImage.setImageURI(profileImage);
+//            Bitmap profileBitmap;
+//
+//            try {
+//                URL url = new URL(photoString);
+//                profileBitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+//                userImage.setImageBitmap(profileBitmap);
+//            } catch (Exception e) {
+//                Log.v(TAG, "Exception: " + e.getMessage());
+//                e.printStackTrace();
+//                userImage.setImageResource(R.drawable.ic_person_head);
+//            }
+
+            new DownloadImageTask(userImage, R.drawable.ic_person_head).execute(photoString);
+
             userName.setText(nameString);
             userEmail.setText(emailString);
         }
