@@ -115,7 +115,6 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
         }
     }
 
-
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
         Log.v(TAG, "firebaseAuthWithGoogle!");
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
@@ -141,7 +140,6 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
             }
         });
     }
-
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
